@@ -1,0 +1,31 @@
+INSERT INTO public.tborcamentopedido(
+    orcpedid, orcpednumpro, cliid, orcpednomobr, orcpeddatsol, orcpeddtaprevent, orcpeddimtam, usuid, orcpedsta, orcpedvalorc, orcpeddatentpro, orcpedqtddiaresent, orcpedvalped, orcpedsalneg, orcpedpesorc, orcpedpesexe, orcpedsalpes, orcpedincpor, orcpedincem, orcpedaltpor, orcpedaltem, empid, orcpedpaiorcpedid
+)
+SELECT 
+    nextval('tborcamentopedido_orcpedid_seq'), 
+    p.orcpednumpro,
+    p.cliid,
+    p.orcpednomobr,
+    p.orcpeddatsol,
+    p.orcpeddtaprevent,
+    p.orcpeddimtam,
+    p.usuid,
+    p.orcpedsta,
+    p.orcpedvalorc,
+    p.orcpeddatentpro,
+    p.orcpedqtddiaresent,
+    p.orcpedvalped,
+    p.orcpedsalneg,
+    p.orcpedpesorc,
+    p.orcpedpesexe,
+    p.orcpedsalpes,
+    p.orcpedincpor,
+    p.orcpedincem,
+    p.orcpedaltpor,
+    p.orcpedaltem,
+    p.empid,
+    p.orcpedpaiorcpedid
+FROM 
+   tborcamentopedido p
+WHERE 
+    p.orcpedid = 1

@@ -1,0 +1,415 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { OrcamentoPedidoComunicaApi } from '../../services/OrcamentoPedidoServices/OrcamentoPedidoComunicaApi';
+import BotaoPadrao from '../../components/BotaoPadraoComponents/BotaoPadrao';
+
+
+interface OrcamentoPedido {
+  orcPedId?: number;
+  orcPedNumPro: string;
+  cliId: number;
+  orcPedNomObr: string;
+  orcPedDatSol: string; // formato 'YYYY-MM-DD'
+  orcPedDtaPrevEnt: string; // formato 'YYYY-MM-DD'
+  orcPedDimTam: string;
+  usuId: number;
+  orcPedSta: number;
+  orcPedValOrc: number;
+  orcPedDatEntPro: string; // formato 'YYYY-MM-DD'
+  orcPedQtdDiaResEnt: number;
+  orcPedValPed: number;
+  orcPedSalNeg: number;
+  orcPedPesOrc: number;
+  orcPedPesExe: number;
+  orcPedSalPes: number;
+  orcPedIncPor: number;
+  orcPedIncEm: string; // formato 'YYYY-MM-DDTHH:MM:SS'
+  orcPedAltPor?: number;
+  orcPedAltEm?: string; // formato 'YYYY-MM-DDTHH:MM:SS'
+  empId: number;
+  orcPedPaiOrcPedId?: number;
+}
+
+const OrcamentoPedidoCadastro: React.FC = () => {
+  const [orcamentoPedido, setOrcamentoPedido] = useState<OrcamentoPedido>({
+    orcPedNumPro: '',
+    cliId: 0,
+    orcPedNomObr: '',
+    orcPedDatSol: new Date().toISOString().split('T')[0],
+    orcPedDtaPrevEnt: new Date().toISOString().split('T')[0],
+    orcPedDimTam: '',
+    usuId: 1,
+    orcPedSta: 1,
+    orcPedValOrc: 0.00,
+    orcPedDatEntPro: new Date().toISOString().split('T')[0],
+    orcPedQtdDiaResEnt: 0,
+    orcPedValPed: 0.00,
+    orcPedSalNeg: 0.00,
+    orcPedPesOrc: 0.00,
+    orcPedPesExe: 0.00,
+    orcPedSalPes: 0.00,
+    orcPedIncPor: 1,
+    orcPedIncEm: new Date().toISOString(),
+    orcPedAltEm: new Date().toISOString(),
+    empId: 1,
+  });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get('id');
+  const modo = queryParams.get('modo');
+
+  const isDesabilita = modo === 'DSP' ? true : false;
+
+  useEffect(() => {
+    if (id && modo !== 'DSP') {
+      OrcamentoPedidoComunicaApi.getById(Number(id))
+        .then((response) => setOrcamentoPedido(response.data))
+        .catch((error) => console.error('Erro ao buscar orçamento de pedido', error));
+    }
+  }, [id, modo]);
+
+  const capturaAlteracao = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setOrcamentoPedido((prevOrcamentoPedido) => ({
+      ...prevOrcamentoPedido,
+      [name]: value,
+    }));
+  };
+
+  const enviar = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (id) {
+      OrcamentoPedidoComunicaApi.update(Number(id), orcamentoPedido)
+        .then(() => navigate('/orcamentopedido/'))
+        .catch((error) => {
+          if (error.response) {
+            const errorMessage = error.response.data?.message || 'Erro desconhecido.';
+            alert(`Erro ao atualizar orçamento de pedido: ${errorMessage}`);
+          } else if (error.request) {
+            alert('Erro ao conectar com o servidor. Verifique sua conexão.');
+          } else {
+            alert('Erro inesperado. Por favor, tente novamente.');
+          }
+        });
+    } else {
+      OrcamentoPedidoComunicaApi.create(orcamentoPedido)
+        .then(() => navigate('/orcamentopedido/'))
+        .catch((error) => {
+          if (error.response) {
+            const status = error.response.status;
+            const message = error.response.data?.Message || 'Erro desconhecido.';
+            if (status === 400) {
+              alert(`Erro de validação: ${message}. Por favor, verifique os dados.`);
+            } else if (status === 500) {
+              alert(`Erro inesperado no servidor: ${message}. Tente novamente mais tarde.`);
+            } else {
+              alert(`Erro: ${message}`);
+            }
+          } else if (error.request) {
+            alert('Erro ao conectar com o servidor. Verifique sua conexão.');
+          } else {
+            alert('Erro desconhecido. Por favor, tente novamente.');
+          }
+        });
+    }
+  };
+
+  const voltar = () => {
+    navigate(-1);
+  };
+
+  return (
+    <div>
+      <div className="tabs">
+        <div
+          className="tabactive"
+        >
+          Dados da Obra
+        </div>
+        <div
+          className="tab"
+          onClick={() => navigate(`/orcamentopedidoprodutocadastro?id=${id}&modo=${modo}`)}
+        
+        >
+          Produtos 
+        </div>
+        <div
+          className="tab"
+        >
+          Engenharia
+        </div>
+        <div
+          className="tab"
+        >
+          Fabricação
+        </div>
+        <div
+          className="tab"
+        >
+          Tranporte
+        </div>
+        <div
+          className="tab"
+        >
+          Montagem
+        </div>
+      </div> 
+      <div>
+        <h1>{modo === 'INS' ? 'Criar Novo Orcamento Pedido' : modo === 'UPD' ? 'Editar Orcamento Pedido' : 'Visualizar Orcamento Pedido'}</h1>
+        <form onSubmit={enviar}>
+          <table>
+            <tr>
+              <td><label>Código do Pedido:</label></td>
+              <td><input
+                type="text" 
+                name="orcPedId"
+                value={orcamentoPedido.orcPedId}
+                onChange={capturaAlteracao}
+                required
+                disabled={true}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Cliente ID:</label></td>
+              <td><input
+                type="number"
+                name="cliId"
+                value={orcamentoPedido.cliId}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita} // Desabilita os campos no modo 'DSP'
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Nome da Obra:</label></td>
+              <td><input
+                type="text"
+                name="orcPedNomObr"
+                value={orcamentoPedido.orcPedNomObr}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita} // Desabilita os campos no modo 'DSP'
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Data Solicitação:</label></td>
+              <td><input
+                type="date"
+                name="orcPedDatSol"
+                value={orcamentoPedido.orcPedDatSol}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita} // Desabilita os campos no modo 'DSP'
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Data Prevista de Entrega:</label></td>
+              <td><input
+                type="date"
+                name="orcPedDtaPrevEnt"
+                value={orcamentoPedido.orcPedDtaPrevEnt}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita} // Desabilita os campos no modo 'DSP'
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Data de Entrega Proposta:</label></td>
+              <td><input
+                type="date"
+                name="orcPedDatEntPro"
+                value={orcamentoPedido.orcPedDatEntPro}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Quantidade de Dias para Resposta de Entrega:</label></td>
+              <td><input
+                type="number"
+                name="orcPedQtdDiaResEnt"
+                value={orcamentoPedido.orcPedQtdDiaResEnt}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Valor Total do Orcamento:</label></td>
+              <td><input
+                type="number"
+                name="orcPedValOrc"
+                value={orcamentoPedido.orcPedValOrc}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Valor do Pedido:</label></td>
+              <td><input
+                type="number"
+                name="orcPedValPed"
+                value={orcamentoPedido.orcPedValPed}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Saldo de Negociação:</label></td>
+              <td><input
+                type="number"
+                name="orcPedSalNeg"
+                value={orcamentoPedido.orcPedSalNeg}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Peso do Orcamento:</label></td>
+              <td><input
+                type="number"
+                name="orcPedPesOrc"
+                value={orcamentoPedido.orcPedPesOrc}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Peso Execução:</label></td>
+              <td><input
+                type="number"
+                name="orcPedPesExe"
+                value={orcamentoPedido.orcPedPesExe}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Saldo Peso:</label></td>
+              <td><input
+                type="number"
+                name="orcPedSalPes"
+                value={orcamentoPedido.orcPedSalPes}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Empresa ID:</label></td>
+              <td><input
+                type="number"
+                name="empId"
+                value={orcamentoPedido.empId}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Incluído Por:</label></td>
+              <td><input
+                type="number"
+                name="orcPedIncPor"
+                value={orcamentoPedido.orcPedIncPor}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Data de Inclusão:</label></td>
+              <td><input
+                type="datetime-local"
+                name="orcPedIncEm"
+                value={orcamentoPedido.orcPedIncEm}
+                onChange={capturaAlteracao}
+                required
+                disabled={isDesabilita}
+              />
+              </td>
+            </tr>
+
+            {orcamentoPedido.orcPedAltPor && (
+              <tr>
+                <td><label>Alterado Por:</label></td>
+                <td><input
+                  type="number"
+                  name="orcPedAltPor"
+                  value={orcamentoPedido.orcPedAltPor || ''}
+                  onChange={capturaAlteracao}
+                  disabled={isDesabilita}
+                />
+                </td>
+              </tr>
+            )}
+
+            {orcamentoPedido.orcPedAltEm && (
+              <tr>
+                <td><label>Data de Alteração:</label></td>
+                <td><input
+                  type="datetime-local"
+                  name="orcPedAltEm"
+                  value={orcamentoPedido.orcPedAltEm || ''}
+                  onChange={capturaAlteracao}
+                  disabled={isDesabilita}
+                />
+                </td>
+              </tr>
+            )}
+
+            <tr>
+              <td className="centro-container">
+                {/* Botões de Voltar e Salvar */}
+                <BotaoPadrao type="button" onClick={voltar}>Voltar</BotaoPadrao>
+                <BotaoPadrao type="submit">Salvar</BotaoPadrao>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+   
+  );
+};
+
+export default OrcamentoPedidoCadastro; 

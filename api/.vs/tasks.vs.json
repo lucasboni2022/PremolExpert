@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarefa-ApiApplication",
+      "appliesTo": "src/main/java/com/premolexpert/api/ApiApplication.java",
+      "type": "launch"
+    }
+  ]
+}

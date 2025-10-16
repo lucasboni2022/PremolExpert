@@ -1,0 +1,10 @@
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #004080;
+  letter-spacing: 0.5px;
+}

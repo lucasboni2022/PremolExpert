@@ -1,0 +1,34 @@
+
+
+INSERT INTO "TBPais" ("PaisId", "PaisNom", "PaisIncPor", "PaisIncEm", "PaisAltPor", "PaisAltEm", "PaisSigla") VALUES
+    (2, 'paulo3', 1, '2024-12-07', 2, '2024-12-08', 'pa'),
+    (7, 'Italia', 1, '2024-12-07', NULL, NULL, 'BR'),
+    (8, 'egito', 1, '2024-12-07', NULL, NULL, 'BR'),
+    (9, 'egito100', 1, '2024-12-07', NULL, NULL, 'BR'),
+    (12, 'testge', 1, '2024-12-14', NULL, NULL, 'BR'),
+    (14, 'EUA', 1, '2024-12-14', NULL, NULL, 'Ea'),
+    (15, 'teste', 1, '2024-12-14', NULL, NULL, 'te'),
+    (16, 'japão', 1, '2024-12-14', NULL, NULL, 'ja'),
+    (17, 'egito', 1, '2024-12-07', NULL, NULL, 'BR');
+
+INSERT INTO "TBEstado" ("EstId", "EstNom", "EstIncPor", "EstIncEm", "EstAltPor", "EstAltEm", "PaisId", "EstSigla") VALUES
+    (2, 'Mato Gro1', 1, '2024-11-20', 1, '2024-11-20', 2, NULL),
+    (3, 'Mato do sul', 1, '2024-11-20', NULL, NULL, 2, NULL);
+
+INSERT INTO "TBMunicipio" ("MunId", "MunNom", "MunIncPor", "MunIncEm", "MunAltPor", "MunAltEm", "EstId") VALUES
+    (1, 'Cuiaba', 1, '2024-11-20', NULL, NULL, 2),
+    (2, 'Pocone', 2, '2024-11-20', 1, '2024-11-20', 3);
+
+INSERT INTO "TBEmpresa" ("EmpId", "EmpNom", "EmpIncPor", "EmpIncEm", "EmpAltPor", "EmpAltEm") VALUES
+    (1, 'Empresa Exemplo Ltda', 1001, '2024-12-02', 1002, '2024-12-03');
+
+INSERT INTO "TBPessoa" ("PesId", "PesNom", "PesCpf", "PesCnpj", "PesEmail", "PesTelPesDDD", "PesTelPes", "PesTelComDDD", "PesTelCom", "PesCelPesDDD", "PesCelPes", "PesCelComDDD", "PesCelComPes", "PesEnd", "MunId", "EmpId", "PesFisJur", "PesIncPor", "PesIncEm", "PesAltPor", "PesAltEm") VALUES
+    (3, 'João Silva', 12345678901, 12345678000199, 'joao.silva@email.com', 11, 987654321, 21, 234567890, 11, 998877665, 21, 912345678, 'Rua Exemplo, 123', 1, 1, 1, 1001, '2024-12-02', 1002, '2024-12-02');
+
+INSERT INTO "TBUsuario" ("UsuId", "UsuLogin", "UsuSenha", "UsuPerCod", "PesId", "UsuIncPor", "UsuIncEm", "UsuAltPor", "UsuAltEm") VALUES
+    (7, 'johndoe', 'senha123', 1, 3, 1001, '2024-12-02', 1002, '2024-12-03');
+
+INSERT INTO "TBCliente" ("CliId", "PesId", "CliObs", "CliIncPor", "CliIncEm", "CliAltPor", "CliAltEm") VALUES
+    (2, 3, 'Cliente com bom histórico de pagamento.', 1001, '2024-12-02', 1002, '2024-12-03');
+
+

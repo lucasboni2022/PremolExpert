@@ -1,0 +1,20 @@
+
+
+
+
+.botao-lista {
+    background-color: white; /* Fundo branco */
+    color:#193282; 
+    border: 2px solid #193282;  /* Borda azul */
+    padding: 1px 1px; /* Ajuste do padding para uma boa aparência */
+    border-radius: 8px; /* Borda arredondada */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Animação suave na troca de cores */
+    width:70px;
+  }
+  
+  .botao-lista:hover {
+    background-color: #193282; /* Fundo azul quando passa o mouse */
+    color: white; /* Texto branco quando passa o mouse */
+  }
+  

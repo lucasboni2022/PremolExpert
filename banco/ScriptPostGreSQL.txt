@@ -1,0 +1,238 @@
+-- 1. Tabelas com apenas chaves primárias (entidades fortes)
+
+CREATE TABLE "TBPais" (
+    "PaisId" SERIAL PRIMARY KEY,
+    "PaisNom" VARCHAR(100) NOT NULL,
+    "PaisIncPor" INT NOT NULL,
+    "PaisIncEm" DATE NOT NULL,
+    "PaisAltPor" INT NULL,
+    "PaisAltEm" DATE NULL,
+    "PaisSigla" VARCHAR(2) NULL
+);
+
+CREATE TABLE "TBEstado" (
+    "EstId" SERIAL PRIMARY KEY,
+    "EstNom" VARCHAR(100) NOT NULL,
+    "EstIncPor" INT NOT NULL,
+    "EstIncEm" DATE NOT NULL,
+    "EstAltPor" INT NULL,
+    "EstAltEm" DATE NULL,
+    "PaisId" INT NOT NULL,
+    "EstSigla" VARCHAR(2) NULL,
+    FOREIGN KEY ("PaisId") REFERENCES "TBPais"("PaisId")
+);
+
+CREATE TABLE "TBMunicipio" (
+    "MunId" SERIAL PRIMARY KEY,
+    "MunNom" VARCHAR(100) NOT NULL,
+    "MunIncPor" INT NOT NULL,
+    "MunIncEm" DATE NOT NULL,
+    "MunAltPor" INT NULL,
+    "MunAltEm" DATE NULL,
+    "EstId" INT NOT NULL,
+    FOREIGN KEY ("EstId") REFERENCES "TBEstado"("EstId")
+);
+
+CREATE TABLE "TBUnidade" (
+    "UniId" SERIAL PRIMARY KEY,
+    "UniNom" VARCHAR(50) NULL,
+    "UniIncPor" INT NOT NULL,
+    "UniIncEm" TIMESTAMP NOT NULL,
+    "UniAltPor" INT NULL,
+    "UniAltEm" TIMESTAMP NULL
+);
+
+CREATE TABLE "TBEmpresa" (
+    "EmpId" SERIAL PRIMARY KEY,
+    "EmpNom" VARCHAR(150) NULL,
+    "EmpIncPor" INT NOT NULL,
+    "EmpIncEm" DATE NOT NULL,
+    "EmpAltPor" INT NULL,
+    "EmpAltEm" DATE NULL
+);
+
+CREATE TABLE "TBGrupo" (
+    "GruId" SERIAL PRIMARY KEY,
+    "GruNom" VARCHAR(100) NULL,
+    "GruIncPor" INT NOT NULL,
+    "GruIncEm" DATE NOT NULL,
+    "GruAltPor" INT NULL,
+    "GruAltEm" DATE NULL,
+    "EmpId" INT NOT NULL,
+    FOREIGN KEY ("EmpId") REFERENCES "TBEmpresa"("EmpId")
+);
+
+CREATE TABLE "TBProduto" (
+    "ProdId" SERIAL PRIMARY KEY,
+    "ProdDsc" VARCHAR(100) NOT NULL,
+    "ProdIncPor" INT NOT NULL,
+    "ProdIncEm" TIMESTAMP NOT NULL,
+    "ProdAltPor" INT NULL,
+    "ProdAltEm" TIMESTAMP NULL,
+    "GruId" INT NULL,  -- Coluna GruId
+    "EmpId" INT NOT NULL,  -- Coluna EmpId adicionada
+    FOREIGN KEY ("GruId") REFERENCES "TBGrupo"("GruId"),  -- Chave estrangeira para TBGrupo
+    FOREIGN KEY ("EmpId") REFERENCES "TBEmpresa"("EmpId")  -- Chave estrangeira para TBEmpresa
+);
+
+CREATE TABLE "TBPessoa" (
+    "PesId" SERIAL PRIMARY KEY,
+    "PesNom" VARCHAR(100) NOT NULL,
+    "PesCpf" BIGINT NULL,
+    "PesCnpj" BIGINT NULL,
+    "PesEmail" VARCHAR(100) NULL,
+    "PesTelPesDDD" INT NULL,
+    "PesTelPes" INT NULL,
+    "PesTelComDDD" INT NULL,
+    "PesTelCom" INT NULL,
+    "PesCelPesDDD" INT NULL,
+    "PesCelPes" INT NULL,
+    "PesCelComDDD" INT NULL,
+    "PesCelComPes" INT NULL,
+    "PesEnd" VARCHAR(200) NULL,
+    "MunId" INT NULL,
+    "EmpId" INT NOT NULL,
+    "PesFisJur" INT NOT NULL,
+    "PesIncPor" INT NOT NULL,
+    "PesIncEm" DATE NOT NULL,
+    "PesAltPor" INT NULL,
+    "PesAltEm" DATE NULL,
+    FOREIGN KEY ("MunId") REFERENCES "TBMunicipio"("MunId"),
+    FOREIGN KEY ("EmpId") REFERENCES "TBEmpresa"("EmpId")
+);
+
+CREATE TABLE "TBCliente" (
+    "CliId" SERIAL PRIMARY KEY,
+    "PesId" INT NOT NULL,  -- Coluna PesId, agora com chave estrangeira
+    "CliObs" VARCHAR(200) NULL,
+    "CliIncPor" INT NOT NULL,
+    "CliIncEm" DATE NOT NULL,
+    "CliAltPor" INT NULL,
+    "CliAltEm" DATE NULL,
+    FOREIGN KEY ("PesId") REFERENCES "TBPessoa"("PesId")  -- Chave estrangeira para TBPessoa
+);
+
+CREATE TABLE "TBClienteRepresentante" (
+    "CliRepId" SERIAL PRIMARY KEY,
+    "CliId" INT NOT NULL,  -- Coluna CliId com chave estrangeira
+    "CliRepNom" VARCHAR(100) NOT NULL,
+    "CliRepTelDDD" INT NULL,
+    "CliRepTel" INT NULL,
+    "CliRepEmail" VARCHAR(100) NULL,
+    "CliRepIncPor" INT NOT NULL,
+    "CliRepIncEm" DATE NOT NULL,
+    "CliRepAltPor" INT NULL,
+    "CliRepAltEm" DATE NULL,
+    FOREIGN KEY ("CliId") REFERENCES "TBCliente"("CliId")  -- Chave estrangeira para TBCliente
+);
+
+CREATE TABLE "TBUsuario" (
+    "UsuId" SERIAL PRIMARY KEY,
+    "UsuLogin" VARCHAR(100) NOT NULL,
+    "UsuSenha" VARCHAR(50) NULL,
+    "UsuPerAtivo" BOOLEAN NOT NULL,
+    "PesId" INT NOT NULL,
+    "UsuIncPor" INT NOT NULL,
+    "UsuIncEm" DATE NOT NULL,
+    "UsuAltPor" INT NULL,
+    "UsuAltEm" DATE NULL,
+    FOREIGN KEY ("PesId") REFERENCES "TBPessoa"("PesId")
+);
+
+-- 2. Tabelas que possuem chaves estrangeiras (entidades dependentes)
+
+CREATE TABLE "TBEmpresaResponsavel" (
+    "EmpResId" SERIAL PRIMARY KEY,
+    "EmpId" INT NOT NULL,
+    "PesId" INT NOT NULL,
+    "EmpResIncPor" INT NOT NULL,
+    "EmpResIncEm" DATE NOT NULL,
+    "EmpResAltPor" INT NULL,
+    "EmpResAltEm" DATE NULL,
+    FOREIGN KEY ("EmpId") REFERENCES "TBEmpresa"("EmpId"),
+    FOREIGN KEY ("PesId") REFERENCES "TBPessoa"("PesId")
+);
+
+CREATE TABLE "TBOrcamentoPedido" (
+    "OrcPedId" SERIAL PRIMARY KEY,
+    "OrcPedNumPro" VARCHAR(20) NOT NULL,
+    "CliId" INT NOT NULL,
+    "OrcPedNomObr" VARCHAR(255) NULL,
+    "OrcPedDatSol" DATE NOT NULL,
+    "OrcPedDtaPrevEnt" DATE NULL,
+    "OrcPedDimTam" VARCHAR(100) NULL,
+    "UsuId" INT NOT NULL,
+    "OrcPedSta" INT NOT NULL,
+    "OrcPedValOrc" DECIMAL(18, 2) NULL,
+    "OrcPedDatEntPro" DATE NULL,
+    "OrcPedQtdDiaResEnt" INT NULL,
+    "OrcPedValPed" DECIMAL(18, 2) NULL,
+    "OrcPedSalNeg" DECIMAL(18, 2) NULL,
+    "OrcPedPesOrc" DECIMAL(18, 2) NULL,
+    "OrcPedPesExe" DECIMAL(18, 2) NULL,
+    "OrcPedSalPes" DECIMAL(18, 2) NULL,
+    "OrcPedIncPor" INT NOT NULL,
+    "OrcPedIncEm" TIMESTAMP NOT NULL,
+    "OrcPedAltPor" INT NULL,
+    "OrcPedAltEm" TIMESTAMP NULL,
+    "EmpId" INT NOT NULL,
+    "OrcPedPaiOrcPedId" INT NULL,
+    FOREIGN KEY ("CliId") REFERENCES "TBCliente"("CliId"),
+    FOREIGN KEY ("EmpId") REFERENCES "TBEmpresa"("EmpId"),
+    FOREIGN KEY ("UsuId") REFERENCES "TBUsuario"("UsuId")
+);
+
+CREATE TABLE "TBOrcamentoPedidoHistorico" (
+    "OrcPedHistId" SERIAL PRIMARY KEY,
+    "OrcPedId" INT NOT NULL,
+    "OrcPedProdSta" INT NOT NULL,
+    "OrcPedProdIncPor" INT NOT NULL,
+    "OrcPedProdIncEm" TIMESTAMP NOT NULL,
+    FOREIGN KEY ("OrcPedId") REFERENCES "TBOrcamentoPedido"("OrcPedId")
+);
+
+CREATE TABLE "TBOrcamentoPedidoProduto" (
+    "OrcPedProdId" SERIAL PRIMARY KEY,
+    "OrcPedId" INT NOT NULL,
+    "ProdId" INT NOT NULL,
+    "UniId" INT NOT NULL,
+    "OrcPedProdQtd" INT NOT NULL,
+    "OrcPedProdVlrUnit" DECIMAL(18, 2) NOT NULL,
+    "OrcPedProdPron" INT NOT NULL,
+    "OrcPedProdAFaze" INT NOT NULL,
+    "OrcPedProdSta" INT NOT NULL,
+    "OrcPedProdIncPor" INT NOT NULL,
+    "OrcPedProdIncEm" TIMESTAMP NOT NULL,
+    "OrcPedProdAltPor" INT NULL,
+    "OrcPedProdAltEm" TIMESTAMP NULL,
+    FOREIGN KEY ("OrcPedId") REFERENCES "TBOrcamentoPedido"("OrcPedId"),
+    FOREIGN KEY ("ProdId") REFERENCES "TBProduto"("ProdId"),
+    FOREIGN KEY ("UniId") REFERENCES "TBUnidade"("UniId")
+);
+
+CREATE TABLE "TBOrcamentoPedidoProdutoFab" (
+    "OrcPedProdFabId" SERIAL PRIMARY KEY,
+    "OrcPedProdId" INT NOT NULL,
+    "OrcPedProdFabSta" INT NOT NULL,
+    "OrcPedProdFabDtaAco" TIMESTAMP NOT NULL,
+    "OrcPedProdFabDtaCon" TIMESTAMP NOT NULL,
+    "OrcPedProdFabDtaLib" TIMESTAMP NOT NULL,
+    "OrcPedProdFabDtaTra" TIMESTAMP NOT NULL,
+    "OrcPedProdFabDtaMon" TIMESTAMP NOT NULL,
+    "OrcPedProdFabIncPor" INT NOT NULL,
+    "OrcPedProdFabIncEm" TIMESTAMP NOT NULL,
+    "OrcPedProdFabAltPor" INT NULL,
+    "OrcPedProdFabAltEm" TIMESTAMP NULL,
+    FOREIGN KEY ("OrcPedProdId") REFERENCES "TBOrcamentoPedidoProduto"("OrcPedProdId")
+);
+
+CREATE TABLE "TBOrcamentoPedidoProdutoFabPro" (
+    "OrcPedProdFaProbId" SERIAL PRIMARY KEY,
+    "OrcPedProdFabId" INT NOT NULL,
+    "OrcPedProdFabProDta" INT NOT NULL,
+    "OrcPedProdFabProIncPor" INT NOT NULL,
+    "OrcPedProdFabProIncEm" TIMESTAMP NOT NULL,
+    "OrcPedProdFabProAltPor" INT NULL,
+    "OrcPedProdFabProAltEm" TIMESTAMP NULL,
+    FOREIGN KEY ("OrcPedProdFabId") REFERENCES "TBOrcamentoPedidoProdutoFab"("OrcPedProdFabId")
+);

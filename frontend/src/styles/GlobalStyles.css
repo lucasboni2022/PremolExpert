@@ -1,0 +1,250 @@
+/* TABELA */
+.table-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px auto;
+  border: 1px solid #004080; /* Azul marinho */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+.table-grid th {
+  background-color: #002B5C;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-grid td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.table-grid tr:hover {
+  background-color: #e6f0ff;
+  transition: background-color 0.2s ease;
+}
+
+.table-grid tr:last-child td {
+  border-bottom: none;
+}
+
+.titulo-filtros {
+  font-size: 20px;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #002b5c;
+  margin-bottom: 12px;
+}
+
+/* CAMPOS DE FILTROS COM COR NEUTRA */
+.grupo-filtros {
+  background-color: #f9f9f9;
+  border: 1px solid #002b5c;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.campo-filtro {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.campo-filtro label {
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #222; /* preto ou cinza escuro */
+}
+
+.campo-filtro input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #444; /* borda cinza escuro */
+  border-radius: 4px;
+  color: #000; /* texto preto */
+}
+
+
+/* TABS */
+.tabs {
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 1px solid #002b5c;
+  border-bottom: none;
+  background-color: #f1f1f1;
+  color: #002b5c;
+}
+
+.tab-ativa {
+  padding: 10px 20px;
+  border: 1px solid #002b5c;
+  border-bottom: none;
+  background-color: #e6f0ff;
+  font-weight: bold;
+  color: #002b5c;
+}
+
+/* TITULO GRUPO */
+.titulo-grupo {
+  background-color: #002b5c;
+  font-size: 20px;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* LINKS / BOTÕES */
+.ajuste-link-botao {
+  text-decoration: none;
+  color: #002b5c;
+}
+
+.ajuste-link-botao:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #002b5c;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* FORMULÁRIO */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #002b5c;
+  border-radius: 4px;
+}
+
+label {
+  font-size: 15px;
+  padding: 2px;
+}
+
+/* OUTROS */
+.centro-container {
+  text-align: center;
+}
+
+.tabela-centralizada {
+  margin-left: auto;
+  margin-right: auto;
+  width: 46%;
+}
+
+.tirar-espaco-interno {
+  padding: 0px;
+}
+
+.tabela-sem-borda {
+  border: 0;
+}
+
+
+/* Media query para telas pequenas */
+@media (max-width: 768px) {
+  /* Ajusta o formulário para telas menores */
+ 
+  input {
+    font-size: 16px; /* Aumenta o tamanho da fonte para facilitar a leitura */
+    padding: 10px;  /* Aumenta o preenchimento para facilitar a digitação */
+  }
+
+  button[type="submit"], .button-voltar, .button-excluir, .button-editar {
+    padding: 12px;  /* Aumenta o tamanho dos botões para maior usabilidade */
+    font-size: 16px; /* Aumenta o tamanho da fonte nos botões */
+  }
+
+  /* Ajuste na tabela */
+  table {
+    font-size: 14px; /* Diminui o tamanho da fonte na tabela para se ajustar melhor */
+  }
+
+  td, th {
+    padding: 12px; /* Aumenta o espaçamento nas células para uma visualização melhor */
+  }
+
+  /* Ajusta a largura das colunas da tabela */
+  table, th, td {
+    word-wrap: break-word; /* Faz com que o texto quebre a linha, evitando overflow */
+  }
+
+  form {
+    margin-left: 0px; /* Ou qualquer valor desejado */
+    background-color: white;
+    padding: 0px; /* Opcional: para adicionar algum espaço interno */
+    width: 50%;
+  }
+  
+  .tabela-centralizada {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* Ou qualquer largura desejada */
+  }
+  
+}
+
+
+
+  /* Ajustes adicionais para dispositivos móveis muito pequenos */
+@media (max-width: 480px) {
+  .button-editar {
+    width: 50%;  /* Torna os botões de largura total */
+    right: 50%;  /* Torna os botões de largura total */
+    padding: 12px; /* Garante que ambos os botões tenham o mesmo tamanho de padding */
+    font-size: 16px; /* Garante que o tamanho da fonte seja o mesmo */
+    margin-bottom: 10px; /* Adiciona um espaço entre os botões */
+  }
+
+  .button-excluir {
+    width: 50%;  /* Torna os botões de largura total */
+    right: 50%;  /* Torna os botões de largura total */
+    padding: 12px; /* Garante que ambos os botões tenham o mesmo tamanho de padding */
+    font-size: 16px; /* Garante que o tamanho da fonte seja o mesmo */
+    margin-bottom: 10px; /* Adiciona um espaço entre os botões */
+  }
+
+  table {
+    font-size: 12px; /* Ajusta a fonte da tabela para dispositivos muito pequenos */
+  }
+
+  th, td {
+    padding: 8px; /* Ajusta o preenchimento para melhor uso de espaço */
+  }
+
+  form {
+    max-width: 400px;
+  }
+
+  .tabela-centralizada {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* Ou qualquer largura desejada */
+  }
+
+}
