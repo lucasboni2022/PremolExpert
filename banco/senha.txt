@@ -1,15 +1,1 @@
-PremolExpert@10PremolExpert@11
-Docker Lucas@10Boni@11   descktop:lucasboni2022Docker
 
-azure Windows server 
-usuário premolexpert, senha premolexpert@10
-
-Aws
-luccasboni2022@gmail.com Lucas@10Boni@11
-
-postgreSQL
-usuario premol 
-Senha PremolExpert@10PremolExpert@11
-
-Usuario postGree
-Lucas@10 
