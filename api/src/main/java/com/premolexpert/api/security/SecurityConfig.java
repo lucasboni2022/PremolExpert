@@ -24,18 +24,40 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                // API REST com JWT não usa CSRF
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll() // 🔓 libera tudo
+
+                // Autenticação stateless
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                // .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // Regras de autorização
+                .authorizeHttpRequests(authorize -> authorize
+                        // Endpoint de login/autenticação
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+
+                        // Swagger / documentação (opcional)
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+
+                        // Qualquer outra rota exige autenticação
+                        .anyRequest().authenticated()
+                )
+
+                // Filtro JWT antes do filtro padrão do Spring
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .build();
     }
 
-
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration
+    ) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
