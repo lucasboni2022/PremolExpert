@@ -22,6 +22,10 @@ public class Estado {
     @Column(name = "paisid")
     private Integer paisId;
 
+    @ManyToOne
+    @JoinColumn(name = "paisid", insertable = false, updatable = false)
+    private Pais pais;
+
     @Column(name = "estincpor")
     private Integer estIncPor;
 

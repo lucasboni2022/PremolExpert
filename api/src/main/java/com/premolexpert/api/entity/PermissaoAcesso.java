@@ -16,16 +16,32 @@ public class PermissaoAcesso {
     @Column(name = "perid")
     private Integer perId;
 
+    @ManyToOne
+    @JoinColumn(name = "perid", insertable = false, updatable = false)
+    private Perfil perfil;
+
     @Column(name = "telid")
     private Integer telId;
 
-    @Column(name = "acaoid")
-    private Integer acaoId;
+    @ManyToOne
+    @JoinColumn(name = "telid", insertable = false, updatable = false)
+    private Tela tela;
+
+    @Column(name = "acaid")
+    private Integer acaId;
+
+    @ManyToOne
+    @JoinColumn(name = "acaid", insertable = false, updatable = false)
+    private Acao acao;
 
     @Column(name = "usuid")
     private Integer usuId;
 
-    @Column(name = "peracemsta")
+    @ManyToOne
+    @JoinColumn(name = "usuid", insertable = false, updatable = false)
+    private Usuario usuario;
+
+    @Column(name = "permacesta")
     private Integer permAceSta;
 
     @Column(name = "permaceincpor")
@@ -40,6 +56,13 @@ public class PermissaoAcesso {
     @Column(name = "permacealtem")
     private LocalDateTime permAceAltEm;
 
+    public Integer getPermAceId() {
+        return permAceId;
+    }
+
+    public void setPermAceId(Integer permAceId) {
+        this.permAceId = permAceId;
+    }
 
     public Integer getPerId() {
         return perId;
@@ -47,6 +70,14 @@ public class PermissaoAcesso {
 
     public void setPerId(Integer perId) {
         this.perId = perId;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public Integer getTelId() {
@@ -57,12 +88,28 @@ public class PermissaoAcesso {
         this.telId = telId;
     }
 
-    public Integer getAcaoId() {
-        return acaoId;
+    public Tela getTela() {
+        return tela;
     }
 
-    public void setAcaoId(Integer acaoId) {
-        this.acaoId = acaoId;
+    public void setTela(Tela tela) {
+        this.tela = tela;
+    }
+
+    public Integer getAcaId() {
+        return acaId;
+    }
+
+    public void setAcaId(Integer acaId) {
+        this.acaId = acaId;
+    }
+
+    public Acao getAcao() {
+        return acao;
+    }
+
+    public void setAcao(Acao acao) {
+        this.acao = acao;
     }
 
     public Integer getUsuId() {
@@ -73,12 +120,12 @@ public class PermissaoAcesso {
         this.usuId = usuId;
     }
 
-    public Integer getPermAceId() {
-        return permAceId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setPermAceId(Integer permAceId) {
-        this.permAceId = permAceId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getPermAceSta() {
@@ -121,6 +168,10 @@ public class PermissaoAcesso {
         this.permAceAltEm = permAceAltEm;
     }
 }
+
+
+
+
 
 
 

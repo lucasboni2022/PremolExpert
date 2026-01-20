@@ -6,9 +6,13 @@ public class PermissaoAcessoDTO {
 
     private Integer permAceId;
     private Integer perId;
+    private String perNom;
     private Integer telId;
-    private Integer acaoId;
+    private String telNom;
+    private Integer acaId;
+    private String acaNom;
     private Integer usuId;
+    private String usuLogin;
     private Integer permAceSta;
     private Integer permAceIncPor;
     private LocalDateTime permAceIncEm;
@@ -31,6 +35,14 @@ public class PermissaoAcessoDTO {
         this.perId = perId;
     }
 
+    public String getPerNom() {
+        return perNom;
+    }
+
+    public void setPerNom(String perNom) {
+        this.perNom = perNom;
+    }
+
     public Integer getTelId() {
         return telId;
     }
@@ -39,12 +51,28 @@ public class PermissaoAcessoDTO {
         this.telId = telId;
     }
 
-    public Integer getAcaoId() {
-        return acaoId;
+    public String getTelNom() {
+        return telNom;
     }
 
-    public void setAcaoId(Integer acaoId) {
-        this.acaoId = acaoId;
+    public void setTelNom(String telNom) {
+        this.telNom = telNom;
+    }
+
+    public Integer getAcaId() {
+        return acaId;
+    }
+
+    public void setAcaId(Integer acaId) {
+        this.acaId = acaId;
+    }
+
+    public String getAcaNom() {
+        return acaNom;
+    }
+
+    public void setAcaNom(String acaNom) {
+        this.acaNom = acaNom;
     }
 
     public Integer getUsuId() {
@@ -53,6 +81,14 @@ public class PermissaoAcessoDTO {
 
     public void setUsuId(Integer usuId) {
         this.usuId = usuId;
+    }
+
+    public String getUsuLogin() {
+        return usuLogin;
+    }
+
+    public void setUsuLogin(String usuLogin) {
+        this.usuLogin = usuLogin;
     }
 
     public Integer getPermAceSta() {

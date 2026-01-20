@@ -64,6 +64,14 @@ public class Municipio {
         this.estId = estId;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     public Integer getEmpId() {
         return empId;
     }

@@ -22,6 +22,7 @@ public class EstadoService {
                 estado.getEstNom(),
                 estado.getEstSigla(),
                 estado.getPaisId(),
+                estado.getPais() != null ? estado.getPais().getPaisNom() : null,
                 estado.getEstIncPor(),
                 estado.getEstIncEm(),
                 estado.getEstAltPor(),
@@ -67,6 +68,15 @@ public class EstadoService {
     public EstadoDTO update(EstadoDTO estadoDTO) {
         if (estadoDTO.getEstId() != null && estadoRepository.existsById(estadoDTO.getEstId())) {
             Estado estado = toEntity(estadoDTO);
+
+            estadoRepository.findById(estadoDTO.getEstId()).ifPresent(existing -> {
+                if (estado.getEstIncEm() == null) {
+                    estado.setEstIncEm(existing.getEstIncEm());
+                }
+                if (estado.getEstIncPor() == null) {
+                    estado.setEstIncPor(existing.getEstIncPor());
+                }
+            });
 
             estado.setEstAltEm(LocalDateTime.now());
 

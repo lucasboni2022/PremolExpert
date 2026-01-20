@@ -21,6 +21,8 @@ public class MunicipioService {
                 municipio.getMunId(),
                 municipio.getMunNom(),
                 municipio.getEstId(),
+                municipio.getEstado() != null ? municipio.getEstado().getEstNom() : null,
+                municipio.getEstado() != null && municipio.getEstado().getPais() != null ? municipio.getEstado().getPais().getPaisNom() : null,
                 municipio.getEmpId(),
                 municipio.getMunMunOrigId(),
                 municipio.getMunAtivo(),

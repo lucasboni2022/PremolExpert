@@ -6,6 +6,8 @@ public class MunicipioDTO {
     private Integer munId;
     private String munNom;
     private Integer estId;
+    private String estNom;
+    private String estPais;
     private Integer empId;
     private Integer munMunOrigId;
     private Boolean munAtivo;
@@ -17,10 +19,12 @@ public class MunicipioDTO {
     public MunicipioDTO() {
     }
 
-    public MunicipioDTO(Integer munId, String munNom, Integer estId, Integer empId, Integer munMunOrigId, Boolean munAtivo, Integer munIncPor, LocalDateTime munIncEm, Integer munAltPor, LocalDateTime munAltEm) {
+    public MunicipioDTO(Integer munId, String munNom, Integer estId, String estNom, String estPais, Integer empId, Integer munMunOrigId, Boolean munAtivo, Integer munIncPor, LocalDateTime munIncEm, Integer munAltPor, LocalDateTime munAltEm) {
         this.munId = munId;
         this.munNom = munNom;
         this.estId = estId;
+        this.estNom = estNom;
+        this.estPais = estPais;
         this.empId = empId;
         this.munMunOrigId = munMunOrigId;
         this.munAtivo = munAtivo;
@@ -52,6 +56,22 @@ public class MunicipioDTO {
 
     public void setEstId(Integer estId) {
         this.estId = estId;
+    }
+
+    public String getEstNom() {
+        return estNom;
+    }
+
+    public void setEstNom(String estNom) {
+        this.estNom = estNom;
+    }
+
+    public String getEstPais() {
+        return estPais;
+    }
+
+    public void setEstPais(String estPais) {
+        this.estPais = estPais;
     }
 
     public Integer getEmpId() {

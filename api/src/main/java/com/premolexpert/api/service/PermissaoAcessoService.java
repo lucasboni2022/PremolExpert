@@ -85,9 +85,21 @@ public class PermissaoAcessoService {
         PermissaoAcessoDTO permissaoAcessoDTO = new PermissaoAcessoDTO();
         permissaoAcessoDTO.setPermAceId(permissaoAcesso.getPermAceId());
         permissaoAcessoDTO.setPerId(permissaoAcesso.getPerId());
+        if (permissaoAcesso.getPerfil() != null) {
+            permissaoAcessoDTO.setPerNom(permissaoAcesso.getPerfil().getPerNom());
+        }
         permissaoAcessoDTO.setTelId(permissaoAcesso.getTelId());
-        permissaoAcessoDTO.setAcaoId(permissaoAcesso.getAcaoId());
+        if (permissaoAcesso.getTela() != null) {
+            permissaoAcessoDTO.setTelNom(permissaoAcesso.getTela().getTelNom());
+        }
+        permissaoAcessoDTO.setAcaId(permissaoAcesso.getAcaId());
+        if (permissaoAcesso.getAcao() != null) {
+            permissaoAcessoDTO.setAcaNom(permissaoAcesso.getAcao().getAcaNom());
+        }
         permissaoAcessoDTO.setUsuId(permissaoAcesso.getUsuId());
+        if (permissaoAcesso.getUsuario() != null) {
+            permissaoAcessoDTO.setUsuLogin(permissaoAcesso.getUsuario().getUsuLogin());
+        }
         permissaoAcessoDTO.setPermAceSta(permissaoAcesso.getPermAceSta());
         permissaoAcessoDTO.setPermAceIncPor(permissaoAcesso.getPermAceIncPor());
         permissaoAcessoDTO.setPermAceIncEm(permissaoAcesso.getPermAceIncEm());
@@ -101,7 +113,7 @@ public class PermissaoAcessoService {
         permissaoAcesso.setPermAceId(permissaoAcessoDTO.getPermAceId());
         permissaoAcesso.setPerId(permissaoAcessoDTO.getPerId());
         permissaoAcesso.setTelId(permissaoAcessoDTO.getTelId());
-        permissaoAcesso.setAcaoId(permissaoAcessoDTO.getAcaoId());
+        permissaoAcesso.setAcaId(permissaoAcessoDTO.getAcaId());
         permissaoAcesso.setUsuId(permissaoAcessoDTO.getUsuId());
         permissaoAcesso.setPermAceSta(permissaoAcessoDTO.getPermAceSta());
         permissaoAcesso.setPermAceIncPor(permissaoAcessoDTO.getPermAceIncPor());
