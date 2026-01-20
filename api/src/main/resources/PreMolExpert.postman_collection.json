@@ -1,0 +1,492 @@
+{
+	"info": {
+		"_postman_id": "b6a7b8c9-d0e1-4f2a-9b3c-5d6e7f8a9b0c",
+		"name": "PreMolExpert API",
+		"description": "Collection for testing PreMolExpert API endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello World",
+			"item": [
+				{
+					"name": "Hello World",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/hello-word"
+					}
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Get All Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/usuario?page=0&size=10"
+					}
+				},
+				{
+					"name": "Get Usuario By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/usuario/1"
+					}
+				},
+				{
+					"name": "Create Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Novo Usuario Teste\",\n    \"pesCpf\": \"123.456.789-00\",\n    \"pesEmail\": \"usuario.teste@email.com\",\n    \"pesFisJur\": \"F\",\n    \"usuLogin\": \"usuario.teste\",\n    \"usuSenha\": \"senha123\",\n    \"usuPerfil\": 1,\n    \"usuAtivo\": true,\n    \"perId\": 1\n}"
+						},
+						"url": "http://localhost:8080/usuario"
+					}
+				},
+				{
+					"name": "Update Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Usuario Atualizado\",\n    \"pesCpf\": \"123.456.789-00\",\n    \"pesEmail\": \"usuario.atualizado@email.com\",\n    \"pesFisJur\": \"F\",\n    \"usuLogin\": \"usuario.teste\",\n    \"usuSenha\": \"novasenha123\",\n    \"usuPerfil\": 2,\n    \"usuAtivo\": true,\n    \"perId\": 1\n}"
+						},
+						"url": "http://localhost:8080/usuario/1"
+					}
+				},
+				{
+					"name": "Delete Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/usuario/1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Get All Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/cliente?page=0&size=10"
+					}
+				},
+				{
+					"name": "Get Cliente By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/cliente/1"
+					}
+				},
+				{
+					"name": "Create Cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Cliente Exemplo\",\n    \"pesCpf\": \"987.654.321-00\",\n    \"pesEmail\": \"cliente@email.com\",\n    \"pesFisJur\": \"F\",\n    \"cliObs\": \"Observação do cliente\"\n}"
+						},
+						"url": "http://localhost:8080/cliente"
+					}
+				},
+				{
+					"name": "Update Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Cliente Atualizado\",\n    \"pesCpf\": \"987.654.321-00\",\n    \"pesEmail\": \"cliente.atualizado@email.com\",\n    \"pesFisJur\": \"F\",\n    \"cliObs\": \"Observação atualizada\"\n}"
+						},
+						"url": "http://localhost:8080/cliente/1"
+					}
+				},
+				{
+					"name": "Delete Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/cliente/1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Funcionario",
+			"item": [
+				{
+					"name": "Get All Funcionarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/funcionario?page=0&size=10"
+					}
+				},
+				{
+					"name": "Get Funcionario By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/funcionario/1"
+					}
+				},
+				{
+					"name": "Create Funcionario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Funcionario Teste\",\n    \"pesCpf\": \"111.222.333-44\",\n    \"pesEmail\": \"func@email.com\",\n    \"pesFisJur\": \"F\",\n    \"funcioObs\": \"Observação do funcionario\"\n}"
+						},
+						"url": "http://localhost:8080/funcionario"
+					}
+				},
+				{
+					"name": "Update Funcionario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pesNom\": \"Funcionario Atualizado\",\n    \"pesCpf\": \"111.222.333-44\",\n    \"pesEmail\": \"func.atualizado@email.com\",\n    \"pesFisJur\": \"F\",\n    \"funcioObs\": \"Observação atualizada\"\n}"
+						},
+						"url": "http://localhost:8080/funcionario/1"
+					}
+				},
+				{
+					"name": "Delete Funcionario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/funcionario/1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Pais",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/pais" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/pais/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"paisNom\": \"Brasil\", \"paisSigla\": \"BR\"}" }, "url": "http://localhost:8080/pais" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"paisId\": 1, \"paisNom\": \"Brasil Atualizado\", \"paisSigla\": \"BR\"}" }, "url": "http://localhost:8080/pais/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/pais/1" } }
+			]
+		},
+		{
+			"name": "Estado",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/estado" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/estado/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"estNom\": \"São Paulo\", \"estSigla\": \"SP\", \"paisId\": 1}" }, "url": "http://localhost:8080/estado" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"estId\": 1, \"estNom\": \"São Paulo Atualizado\", \"estSigla\": \"SP\", \"paisId\": 1}" }, "url": "http://localhost:8080/estado/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/estado/1" } }
+			]
+		},
+		{
+			"name": "Municipio",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/municipio" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/municipio/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"munNom\": \"São Paulo\", \"estId\": 1, \"empId\": 1, \"munAtivo\": true}" }, "url": "http://localhost:8080/municipio" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"munId\": 1, \"munNom\": \"São Paulo Atualizado\", \"estId\": 1, \"empId\": 1, \"munAtivo\": true}" }, "url": "http://localhost:8080/municipio/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/municipio/1" } }
+			]
+		},
+		{
+			"name": "Unidade",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/unidade" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/unidade/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"uniNom\": \"Metro\"}" }, "url": "http://localhost:8080/unidade" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"uniId\": 1, \"uniNom\": \"Metro Atualizado\"}" }, "url": "http://localhost:8080/unidade/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/unidade/1" } }
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/empresa" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/empresa/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"empNom\": \"Minha Empresa\"}" }, "url": "http://localhost:8080/empresa" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"empId\": 1, \"empNom\": \"Minha Empresa Atualizada\"}" }, "url": "http://localhost:8080/empresa/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/empresa/1" } }
+			]
+		},
+		{
+			"name": "Perfil",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/perfil" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/perfil/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perNom\": \"Administrador\", \"empId\": 1}" }, "url": "http://localhost:8080/perfil" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"perNom\": \"Administrador Atualizado\", \"empId\": 1}" }, "url": "http://localhost:8080/perfil/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/perfil/1" } }
+			]
+		},
+		{
+			"name": "Tela",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/tela" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/tela/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Tela Inicial\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telId\": 1, \"telNom\": \"Tela Inicial Atualizada\"}" }, "url": "http://localhost:8080/tela/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/tela/1" } }
+			]
+		},
+		{
+			"name": "Acao",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/acao" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/acao/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaNom\": \"Salvar\"}" }, "url": "http://localhost:8080/acao" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaId\": 1, \"acaNom\": \"Salvar Atualizado\"}" }, "url": "http://localhost:8080/acao/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/acao/1" } }
+			]
+		},
+		{
+			"name": "Servico",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/servico" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/servico/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"serDesc\": \"Serviço 1\", \"serFabricacao\": \"Interna\", \"empId\": 1}" }, "url": "http://localhost:8080/servico" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"serId\": 1, \"serDesc\": \"Serviço 1 Atualizado\", \"serFabricacao\": \"Interna\", \"empId\": 1}" }, "url": "http://localhost:8080/servico/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/servico/1" } }
+			]
+		},
+		{
+			"name": "ServicoCusto",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/servicocusto" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/servicocusto/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"serId\": 1, \"serCustoNom\": \"Custo 1\", \"serCustoVlrUnit\": 100.00}" }, "url": "http://localhost:8080/servicocusto" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"serCustoId\": 1, \"serId\": 1, \"serCustoNom\": \"Custo 1 Atualizado\", \"serCustoVlrUnit\": 150.00}" }, "url": "http://localhost:8080/servicocusto/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/servicocusto/1" } }
+			]
+		},
+		{
+			"name": "OrcamentoPedido",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedido" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedido/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedNumPro\": \"PROJ-001\", \"cliId\": 1, \"orcPedNomObr\": \"Obra 1\", \"orcPedValOrc\": 5000.00}" }, "url": "http://localhost:8080/orcamentopedido" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedId\": 1, \"orcPedNumPro\": \"PROJ-001-UPD\", \"cliId\": 1, \"orcPedNomObr\": \"Obra 1 Atualizada\", \"orcPedValOrc\": 6000.00}" }, "url": "http://localhost:8080/orcamentopedido/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/orcamentopedido/1" } }
+			]
+		},
+		{
+			"name": "OrcamentoPedidoHistorico",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidohistorico" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidohistorico/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedId\": 1, \"orcPedEtapa\": 1, \"orcPedHistObs\": \"Histórico inicial\"}" }, "url": "http://localhost:8080/orcamentopedidohistorico" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedHistId\": 1, \"orcPedId\": 1, \"orcPedEtapa\": 2, \"orcPedHistObs\": \"Histórico atualizado\"}" }, "url": "http://localhost:8080/orcamentopedidohistorico/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/orcamentopedidohistorico/1" } }
+			]
+		},
+		{
+			"name": "OrcamentoPedidoCustoObra",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobra" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobra/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedId\": 1, \"serCustoId\": 1, \"orcPedCustoObrQtd\": 10}" }, "url": "http://localhost:8080/orcamentopedidocustoobra" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedCustoObrId\": 1, \"orcPedId\": 1, \"serCustoId\": 1, \"orcPedCustoObrQtd\": 20}" }, "url": "http://localhost:8080/orcamentopedidocustoobra/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/orcamentopedidocustoobra/1" } }
+			]
+		},
+		{
+			"name": "OrcamentoPedidoCustoObraEng",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobraeng" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobraeng/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedCustoObrId\": 1, \"orcPedCustoObrEngQtdAFazer\": 5}" }, "url": "http://localhost:8080/orcamentopedidocustoobraeng" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedCustoObrEngId\": 1, \"orcPedCustoObrId\": 1, \"orcPedCustoObrEngQtdAFazer\": 10}" }, "url": "http://localhost:8080/orcamentopedidocustoobraeng/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/orcamentopedidocustoobraeng/1" } }
+			]
+		},
+		{
+			"name": "OrcamentoPedidoCustoObraEngPro",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobraengpro" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/orcamentopedidocustoobraengpro/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedCustoObrEngId\": 1, \"orcPedCustoObrEngProProduto\": \"Produto X\", \"orcPedCustoObrEngProQtd\": 2}" }, "url": "http://localhost:8080/orcamentopedidocustoobraengpro" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"orcPedCustoObrEngProId\": 1, \"orcPedCustoObrEngId\": 1, \"orcPedCustoObrEngProProduto\": \"Produto X Atualizado\", \"orcPedCustoObrEngProQtd\": 5}" }, "url": "http://localhost:8080/orcamentopedidocustoobraengpro/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/orcamentopedidocustoobraengpro/1" } }
+			]
+		},
+		{
+			"name": "PermissaoAcesso",
+			"item": [
+				{ "name": "Get All", "request": { "method": "GET", "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Get By ID", "request": { "method": "GET", "url": "http://localhost:8080/permissaoacesso/1" } },
+				{ "name": "Create", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 1, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Update", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"permAceId\": 1, \"perId\": 1, \"telId\": 1, \"acaoId\": 1, \"permAceSta\": 0}" }, "url": "http://localhost:8080/permissaoacesso/1" } },
+				{ "name": "Delete", "request": { "method": "DELETE", "url": "http://localhost:8080/permissaoacesso/1" } }
+			]
+		},
+		{
+			"name": "Populate Telas",
+			"item": [
+				{ "name": "Insert Tela Acao", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Acao\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Cliente", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Cliente\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Empresa", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Empresa\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Estado", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Estado\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Funcionario", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Funcionario\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Municipio", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Municipio\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela OrcamentoPedido", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"OrcamentoPedido\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela OrcamentoPedidoCustoObra", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"OrcamentoPedidoCustoObra\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela OrcamentoPedidoCustoObraEng", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"OrcamentoPedidoCustoObraEng\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela OrcamentoPedidoCustoObraEngPro", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"OrcamentoPedidoCustoObraEngPro\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela OrcamentoPedidoHistorico", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"OrcamentoPedidoHistorico\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Pais", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Pais\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Perfil", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Perfil\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela PermissaoAcesso", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"PermissaoAcesso\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Produto", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Produto\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Servico", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Servico\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela ServicoCusto", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"ServicoCusto\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Tela", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Tela\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Unidade", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Unidade\"}" }, "url": "http://localhost:8080/tela" } },
+				{ "name": "Insert Tela Usuario", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"telNom\": \"Usuario\"}" }, "url": "http://localhost:8080/tela" } }
+			]
+		},
+		{
+			"name": "Populate Acao",
+			"item": [
+				{ "name": "Insert Acao Consultar", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaNom\": \"Consultar\"}" }, "url": "http://localhost:8080/acao" } },
+				{ "name": "Insert Acao Incluir", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaNom\": \"Incluir\"}" }, "url": "http://localhost:8080/acao" } },
+				{ "name": "Insert Acao Alterar", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaNom\": \"Alterar\"}" }, "url": "http://localhost:8080/acao" } },
+				{ "name": "Insert Acao Excluir", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"acaNom\": \"Excluir\"}" }, "url": "http://localhost:8080/acao" } }
+			]
+		},
+		{
+			"name": "Populate PermissaoAcesso",
+			"item": [
+				{ "name": "Permissao Tela 1 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 1, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 1 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 1, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 1 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 1, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 1 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 1, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 2 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 2, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 2 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 2, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 2 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 2, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 2 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 2, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 3 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 3, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 3 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 3, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 3 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 3, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 3 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 3, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 4 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 4, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 4 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 4, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 4 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 4, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 4 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 4, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 5 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 5, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 5 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 5, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 5 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 5, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 5 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 5, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 6 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 6, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 6 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 6, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 6 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 6, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 6 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 6, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 7 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 7, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 7 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 7, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 7 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 7, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 7 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 7, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 8 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 8, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 8 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 8, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 8 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 8, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 8 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 8, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 9 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 9, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 9 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 9, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 9 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 9, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 9 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 9, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 10 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 10, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 10 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 10, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 10 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 10, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 10 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 10, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 11 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 11, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 11 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 11, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 11 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 11, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 11 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 11, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 12 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 12, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 12 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 12, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 12 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 12, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 12 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 12, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 13 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 13, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 13 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 13, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 13 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 13, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 13 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 13, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 14 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 14, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 14 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 14, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 14 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 14, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 14 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 14, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 15 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 15, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 15 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 15, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 15 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 15, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 15 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 15, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 16 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 16, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 16 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 16, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 16 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 16, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 16 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 16, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 17 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 17, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 17 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 17, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 17 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 17, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 17 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 17, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 18 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 18, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 18 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 18, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 18 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 18, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 18 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 18, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 19 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 19, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 19 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 19, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 19 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 19, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 19 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 19, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 20 Acao 1", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 20, \"acaoId\": 1, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 20 Acao 2", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 20, \"acaoId\": 2, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 20 Acao 3", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 20, \"acaoId\": 3, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } },
+				{ "name": "Permissao Tela 20 Acao 4", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"perId\": 1, \"telId\": 20, \"acaoId\": 4, \"permAceSta\": 1}" }, "url": "http://localhost:8080/permissaoacesso" } }
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"usuario.teste\",\n    \"senha\": \"senha123\"\n}"
+						},
+						"url": "http://localhost:8080/auth/login"
+					}
+				}
+			]
+		}
+	]
+}
