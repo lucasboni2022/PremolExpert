@@ -7,10 +7,6 @@ import java.time.LocalDateTime;
 @Table(name = "tbfuncionario")
 @PrimaryKeyJoinColumn(name = "funcioid") // PK = FK para Pessoa
 public class Funcionario extends Pessoa {
-   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "funcio_seq")
-   // @SequenceGenerator(name = "funcionario_seq", sequenceName = "tbfuncionario_funcioid_seq", allocationSize = 1)
-   // @Column(name = "funcioid", nullable = false)
-   // private Integer funcioId;
 
     @Column(name = "funcioobs", columnDefinition = "TEXT")
     private String funcioObs;

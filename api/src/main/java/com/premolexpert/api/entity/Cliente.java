@@ -8,10 +8,7 @@ import java.time.LocalDateTime;
 @PrimaryKeyJoinColumn(name = "cliid") // PK = FK para Pessoa
 
 public class Cliente extends Pessoa {
-  //  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_seq")
-  //  @SequenceGenerator(name = "empresa_seq", sequenceName = "tbcliente_cliid_seq", allocationSize = 1)
- //   @Column(name = "cliid", nullable = false)
-   // private Integer cliId;
+
 
     @Column(name = "cliobs", columnDefinition = "TEXT")
     private String cliObs;
