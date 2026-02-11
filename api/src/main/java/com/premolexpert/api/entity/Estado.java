@@ -9,7 +9,11 @@ public class Estado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estado_seq")
-    @SequenceGenerator(name = "estado_seq", sequenceName = "tbestado_estid_seq", allocationSize = 1)
+    @SequenceGenerator(
+            name = "estado_seq",
+            sequenceName = "tbestado_estid_seq",
+            allocationSize = 1
+    )
     @Column(name = "estid", nullable = false)
     private Integer estId;
 
@@ -19,10 +23,10 @@ public class Estado {
     @Column(name = "estsigla", length = 2, nullable = false)
     private String estSigla;
 
-    @Column(name = "paisid")
+    @Column(name = "paisid", nullable = false)
     private Integer paisId;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "paisid", insertable = false, updatable = false)
     private Pais pais;
 
@@ -37,6 +41,8 @@ public class Estado {
 
     @Column(name = "estaltem")
     private LocalDateTime estAltEm;
+
+    // ===== getters e setters =====
 
     public Integer getEstId() {
         return estId;
@@ -69,6 +75,14 @@ public class Estado {
     public void setPaisId(Integer paisId) {
         this.paisId = paisId;
     }
+
+   public Pais getPais(){
+        return pais;
+   }
+
+   public void setPais(Pais pais){
+        this.pais = pais;
+   }
 
     public Integer getEstIncPor() {
         return estIncPor;

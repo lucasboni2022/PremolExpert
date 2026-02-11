@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tbpermissaoacesso")
+@Table(name = "tbpermissaoacesso",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"perid", "telid", "acaid", "usuid"})
+                }
+        )
 public class PermissaoAcesso {
 
     @Id
@@ -13,29 +17,18 @@ public class PermissaoAcesso {
     @Column(name = "permaceid", nullable = false)
     private Integer permAceId;
 
-    @Column(name = "perid")
-    private Integer perId;
 
     @ManyToOne
     @JoinColumn(name = "perid", insertable = false, updatable = false)
     private Perfil perfil;
 
-    @Column(name = "telid")
-    private Integer telId;
-
     @ManyToOne
     @JoinColumn(name = "telid", insertable = false, updatable = false)
     private Tela tela;
 
-    @Column(name = "acaid")
-    private Integer acaId;
-
     @ManyToOne
     @JoinColumn(name = "acaid", insertable = false, updatable = false)
     private Acao acao;
-
-    @Column(name = "usuid")
-    private Integer usuId;
 
     @ManyToOne
     @JoinColumn(name = "usuid", insertable = false, updatable = false)
@@ -64,28 +57,12 @@ public class PermissaoAcesso {
         this.permAceId = permAceId;
     }
 
-    public Integer getPerId() {
-        return perId;
-    }
-
-    public void setPerId(Integer perId) {
-        this.perId = perId;
-    }
-
     public Perfil getPerfil() {
         return perfil;
     }
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
-    }
-
-    public Integer getTelId() {
-        return telId;
-    }
-
-    public void setTelId(Integer telId) {
-        this.telId = telId;
     }
 
     public Tela getTela() {
@@ -96,28 +73,12 @@ public class PermissaoAcesso {
         this.tela = tela;
     }
 
-    public Integer getAcaId() {
-        return acaId;
-    }
-
-    public void setAcaId(Integer acaId) {
-        this.acaId = acaId;
-    }
-
     public Acao getAcao() {
         return acao;
     }
 
     public void setAcao(Acao acao) {
         this.acao = acao;
-    }
-
-    public Integer getUsuId() {
-        return usuId;
-    }
-
-    public void setUsuId(Integer usuId) {
-        this.usuId = usuId;
     }
 
     public Usuario getUsuario() {

@@ -16,6 +16,9 @@ public class ServicoService {
     @Autowired
     private ServicoRepository servicoRepository;
 
+    @Autowired
+    private com.premolexpert.api.repository.EmpresaRepository empresaRepository;
+
     private ServicoDTO toDTO(Servico servico) {
         ServicoDTO servicoDTO = new ServicoDTO();
         servicoDTO.setSerId(servico.getSerId());
@@ -24,7 +27,11 @@ public class ServicoService {
         servicoDTO.setSerSessaoLargura(servico.getSerSessaoLargura());
         servicoDTO.setSerSessaoComprimento(servico.getSerSessaoComprimento());
         servicoDTO.setSerSessaoAltura(servico.getSerSessaoAltura());
-        servicoDTO.setEmpId(servico.getEmpId());
+        
+        if (servico.getEmpresa() != null) {
+            servicoDTO.setEmpId(servico.getEmpresa().getEmpId());
+        }
+        
         servicoDTO.setSerIncEm(servico.getSerIncEm());
         servicoDTO.setSerIncPor(servico.getSerIncPor());
         servicoDTO.setSerAltEm(servico.getSerAltEm());
@@ -40,7 +47,12 @@ public class ServicoService {
         servico.setSerSessaoLargura(servicoDTO.getSerSessaoLargura());
         servico.setSerSessaoComprimento(servicoDTO.getSerSessaoComprimento());
         servico.setSerSessaoAltura(servicoDTO.getSerSessaoAltura());
-        servico.setEmpId(servicoDTO.getEmpId());
+        
+        if (servicoDTO.getEmpId() != null) {
+            empresaRepository.findById(servicoDTO.getEmpId())
+                .ifPresent(servico::setEmpresa);
+        }
+        
         servico.setSerIncEm(servicoDTO.getSerIncEm());
         servico.setSerIncPor(servicoDTO.getSerIncPor());
         servico.setSerAltEm(servicoDTO.getSerAltEm());

@@ -3,6 +3,9 @@ package com.premolexpert.api.service;
 import com.premolexpert.api.dto.OrcamentoPedidoCustoObraDTO;
 import com.premolexpert.api.entity.OrcamentoPedidoCustoObra;
 import com.premolexpert.api.repository.OrcamentoPedidoCustoObraRepository;
+import com.premolexpert.api.repository.OrcamentoPedidoRepository;
+import com.premolexpert.api.repository.ServicoCustoRepository;
+import com.premolexpert.api.repository.UnidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +19,15 @@ public class OrcamentoPedidoCustoObraService {
     @Autowired
     private OrcamentoPedidoCustoObraRepository orcamentoPedidoCustoObraRepository;
 
+    @Autowired
+    private OrcamentoPedidoRepository orcamentoPedidoRepository;
+
+    @Autowired
+    private ServicoCustoRepository servicoCustoRepository;
+
+    @Autowired
+    private UnidadeRepository unidadeRepository;
+
     public Page<OrcamentoPedidoCustoObraDTO> getAll(int page, int size) {
         return orcamentoPedidoCustoObraRepository.findAll(PageRequest.of(page, size)).map(this::toDTO);
     }
@@ -24,37 +36,37 @@ public class OrcamentoPedidoCustoObraService {
         return orcamentoPedidoCustoObraRepository.findById(id).map(this::toDTO).orElse(null);
     }
 
-    public OrcamentoPedidoCustoObraDTO create(OrcamentoPedidoCustoObraDTO orcamentoPedidoCustoObraDTO) {
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrId(null);
-        OrcamentoPedidoCustoObra orcamentoPedidoCustoObra = toEntity(orcamentoPedidoCustoObraDTO);
+    public OrcamentoPedidoCustoObraDTO create(OrcamentoPedidoCustoObraDTO dto) {
+        dto.setOrcPedCustoObrId(null);
+        OrcamentoPedidoCustoObra entity = toEntity(dto);
         
         LocalDateTime now = LocalDateTime.now();
-        orcamentoPedidoCustoObra.setOrcPedCustoObrIncEm(now);
-        orcamentoPedidoCustoObra.setOrcPedCustoObrIncPor(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrIncPor());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltEm(null);
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltPor(null);
+        entity.setIncluidoEm(now);
+        entity.setIncluidoPor(dto.getOrcPedCustoObrIncPor());
+        entity.setAlteradoEm(null);
+        entity.setAlteradoPor(null);
 
-        OrcamentoPedidoCustoObra saved = orcamentoPedidoCustoObraRepository.save(orcamentoPedidoCustoObra);
+        OrcamentoPedidoCustoObra saved = orcamentoPedidoCustoObraRepository.save(entity);
         return toDTO(saved);
     }
 
-    public OrcamentoPedidoCustoObraDTO update(OrcamentoPedidoCustoObraDTO orcamentoPedidoCustoObraDTO) {
-        if (orcamentoPedidoCustoObraDTO.getOrcPedCustoObrId() == null || !orcamentoPedidoCustoObraRepository.existsById(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrId())) {
+    public OrcamentoPedidoCustoObraDTO update(OrcamentoPedidoCustoObraDTO dto) {
+        if (dto.getOrcPedCustoObrId() == null || !orcamentoPedidoCustoObraRepository.existsById(dto.getOrcPedCustoObrId())) {
             return null;
         }
-        OrcamentoPedidoCustoObra orcamentoPedidoCustoObra = toEntity(orcamentoPedidoCustoObraDTO);
+        OrcamentoPedidoCustoObra entity = toEntity(dto);
         
-        OrcamentoPedidoCustoObra existing = orcamentoPedidoCustoObraRepository.findById(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrId()).orElse(null);
+        OrcamentoPedidoCustoObra existing = orcamentoPedidoCustoObraRepository.findById(dto.getOrcPedCustoObrId()).orElse(null);
         if (existing != null) {
-            orcamentoPedidoCustoObra.setOrcPedCustoObrIncEm(existing.getOrcPedCustoObrIncEm());
-            orcamentoPedidoCustoObra.setOrcPedCustoObrIncPor(existing.getOrcPedCustoObrIncPor());
+            entity.setIncluidoEm(existing.getIncluidoEm());
+            entity.setIncluidoPor(existing.getIncluidoPor());
         }
 
         LocalDateTime now = LocalDateTime.now();
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltEm(now);
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltPor(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrAltPor());
+        entity.setAlteradoEm(now);
+        entity.setAlteradoPor(dto.getOrcPedCustoObrAltPor());
 
-        OrcamentoPedidoCustoObra saved = orcamentoPedidoCustoObraRepository.save(orcamentoPedidoCustoObra);
+        OrcamentoPedidoCustoObra saved = orcamentoPedidoCustoObraRepository.save(entity);
         return toDTO(saved);
     }
 
@@ -62,41 +74,64 @@ public class OrcamentoPedidoCustoObraService {
         orcamentoPedidoCustoObraRepository.deleteById(id);
     }
 
-    private OrcamentoPedidoCustoObraDTO toDTO(OrcamentoPedidoCustoObra orcamentoPedidoCustoObra) {
-        OrcamentoPedidoCustoObraDTO orcamentoPedidoCustoObraDTO = new OrcamentoPedidoCustoObraDTO();
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrId(orcamentoPedidoCustoObra.getOrcPedCustoObrId());
-        orcamentoPedidoCustoObraDTO.setOrcPedId(orcamentoPedidoCustoObra.getOrcPedId());
-        orcamentoPedidoCustoObraDTO.setSerCustoId(orcamentoPedidoCustoObra.getSerCustoId());
-        orcamentoPedidoCustoObraDTO.setUniId(orcamentoPedidoCustoObra.getUniId());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrQtd(orcamentoPedidoCustoObra.getOrcPedCustoObrQtd());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrVlrUnit(orcamentoPedidoCustoObra.getOrcPedCustoObrVlrUnit());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrPron(orcamentoPedidoCustoObra.getOrcPedCustoObrPron());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrFaze(orcamentoPedidoCustoObra.getOrcPedCustoObrFaze());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrSitua(orcamentoPedidoCustoObra.getOrcPedCustoObrSitua());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrTipo(orcamentoPedidoCustoObra.getOrcPedCustoObrTipo());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrIncPor(orcamentoPedidoCustoObra.getOrcPedCustoObrIncPor());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrIncEm(orcamentoPedidoCustoObra.getOrcPedCustoObrIncEm());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrAltPor(orcamentoPedidoCustoObra.getOrcPedCustoObrAltPor());
-        orcamentoPedidoCustoObraDTO.setOrcPedCustoObrAltEm(orcamentoPedidoCustoObra.getOrcPedCustoObrAltEm());
-        return orcamentoPedidoCustoObraDTO;
+    private OrcamentoPedidoCustoObraDTO toDTO(OrcamentoPedidoCustoObra entity) {
+        OrcamentoPedidoCustoObraDTO dto = new OrcamentoPedidoCustoObraDTO();
+        dto.setOrcPedCustoObrId(entity.getId());
+        
+        if (entity.getOrcamentoPedido() != null) {
+            dto.setOrcPedId(entity.getOrcamentoPedido().getOrcPedId());
+        }
+        
+        if (entity.getServicoCusto() != null) {
+            dto.setSerCustoId(entity.getServicoCusto().getSerCustoId());
+        }
+        
+        if (entity.getUnidade() != null) {
+            dto.setUniId(entity.getUnidade().getUniId());
+        }
+        
+        dto.setOrcPedCustoObrQtd(entity.getQuantidade());
+        dto.setOrcPedCustoObrVlrUnit(entity.getValorUnitario());
+        dto.setOrcPedCustoObrPron(entity.getPrazo());
+        dto.setOrcPedCustoObrFaze(entity.getFase());
+        dto.setOrcPedCustoObrSitua(entity.getSituacao());
+        dto.setOrcPedCustoObrTipo(entity.getTipo());
+        dto.setOrcPedCustoObrIncPor(entity.getIncluidoPor());
+        dto.setOrcPedCustoObrIncEm(entity.getIncluidoEm());
+        dto.setOrcPedCustoObrAltPor(entity.getAlteradoPor());
+        dto.setOrcPedCustoObrAltEm(entity.getAlteradoEm());
+        return dto;
     }
 
-    private OrcamentoPedidoCustoObra toEntity(OrcamentoPedidoCustoObraDTO orcamentoPedidoCustoObraDTO) {
-        OrcamentoPedidoCustoObra orcamentoPedidoCustoObra = new OrcamentoPedidoCustoObra();
-        orcamentoPedidoCustoObra.setOrcPedCustoObrId(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrId());
-        orcamentoPedidoCustoObra.setOrcPedId(orcamentoPedidoCustoObraDTO.getOrcPedId());
-        orcamentoPedidoCustoObra.setSerCustoId(orcamentoPedidoCustoObraDTO.getSerCustoId());
-        orcamentoPedidoCustoObra.setUniId(orcamentoPedidoCustoObraDTO.getUniId());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrQtd(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrQtd());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrVlrUnit(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrVlrUnit());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrPron(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrPron());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrFaze(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrFaze());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrSitua(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrSitua());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrTipo(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrTipo());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrIncPor(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrIncPor());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrIncEm(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrIncEm());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltPor(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrAltPor());
-        orcamentoPedidoCustoObra.setOrcPedCustoObrAltEm(orcamentoPedidoCustoObraDTO.getOrcPedCustoObrAltEm());
-        return orcamentoPedidoCustoObra;
+    private OrcamentoPedidoCustoObra toEntity(OrcamentoPedidoCustoObraDTO dto) {
+        OrcamentoPedidoCustoObra entity = new OrcamentoPedidoCustoObra();
+        entity.setId(dto.getOrcPedCustoObrId());
+        
+        if (dto.getOrcPedId() != null) {
+            orcamentoPedidoRepository.findById(dto.getOrcPedId())
+                .ifPresent(entity::setOrcamentoPedido);
+        }
+        
+        if (dto.getSerCustoId() != null) {
+            servicoCustoRepository.findById(dto.getSerCustoId())
+                .ifPresent(entity::setServicoCusto);
+        }
+        
+        if (dto.getUniId() != null) {
+            unidadeRepository.findById(dto.getUniId())
+                .ifPresent(entity::setUnidade);
+        }
+        
+        entity.setQuantidade(dto.getOrcPedCustoObrQtd());
+        entity.setValorUnitario(dto.getOrcPedCustoObrVlrUnit());
+        entity.setPrazo(dto.getOrcPedCustoObrPron());
+        entity.setFase(dto.getOrcPedCustoObrFaze());
+        entity.setSituacao(dto.getOrcPedCustoObrSitua());
+        entity.setTipo(dto.getOrcPedCustoObrTipo());
+        entity.setIncluidoPor(dto.getOrcPedCustoObrIncPor());
+        entity.setIncluidoEm(dto.getOrcPedCustoObrIncEm());
+        entity.setAlteradoPor(dto.getOrcPedCustoObrAltPor());
+        entity.setAlteradoEm(dto.getOrcPedCustoObrAltEm());
+        return entity;
     }
 }

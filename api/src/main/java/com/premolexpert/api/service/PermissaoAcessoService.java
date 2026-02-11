@@ -18,6 +18,18 @@ public class PermissaoAcessoService {
     @Autowired
     private PermissaoAcessoRepository permissaoAcessoRepository;
 
+    @Autowired
+    private com.premolexpert.api.repository.PerfilRepository perfilRepository;
+
+    @Autowired
+    private com.premolexpert.api.repository.TelaRepository telaRepository;
+
+    @Autowired
+    private com.premolexpert.api.repository.AcaoRepository acaoRepository;
+
+    @Autowired
+    private com.premolexpert.api.repository.UsuarioRepository usuarioRepository;
+
     public Page<PermissaoAcessoDTO> getAll(int page, int size) {
         return permissaoAcessoRepository.findAll(PageRequest.of(page, size)).map(this::toDTO);
     }
@@ -84,22 +96,27 @@ public class PermissaoAcessoService {
     private PermissaoAcessoDTO toDTO(PermissaoAcesso permissaoAcesso) {
         PermissaoAcessoDTO permissaoAcessoDTO = new PermissaoAcessoDTO();
         permissaoAcessoDTO.setPermAceId(permissaoAcesso.getPermAceId());
-        permissaoAcessoDTO.setPerId(permissaoAcesso.getPerId());
+        
         if (permissaoAcesso.getPerfil() != null) {
+            permissaoAcessoDTO.setPerId(permissaoAcesso.getPerfil().getPerId());
             permissaoAcessoDTO.setPerNom(permissaoAcesso.getPerfil().getPerNom());
         }
-        permissaoAcessoDTO.setTelId(permissaoAcesso.getTelId());
+        
         if (permissaoAcesso.getTela() != null) {
+            permissaoAcessoDTO.setTelId(permissaoAcesso.getTela().getTelId());
             permissaoAcessoDTO.setTelNom(permissaoAcesso.getTela().getTelNom());
         }
-        permissaoAcessoDTO.setAcaId(permissaoAcesso.getAcaId());
+        
         if (permissaoAcesso.getAcao() != null) {
+            permissaoAcessoDTO.setAcaId(permissaoAcesso.getAcao().getAcaId());
             permissaoAcessoDTO.setAcaNom(permissaoAcesso.getAcao().getAcaNom());
         }
-        permissaoAcessoDTO.setUsuId(permissaoAcesso.getUsuId());
+        
         if (permissaoAcesso.getUsuario() != null) {
+            permissaoAcessoDTO.setUsuId(permissaoAcesso.getUsuario().getUsuId());
             permissaoAcessoDTO.setUsuLogin(permissaoAcesso.getUsuario().getUsuLogin());
         }
+
         permissaoAcessoDTO.setPermAceSta(permissaoAcesso.getPermAceSta());
         permissaoAcessoDTO.setPermAceIncPor(permissaoAcesso.getPermAceIncPor());
         permissaoAcessoDTO.setPermAceIncEm(permissaoAcesso.getPermAceIncEm());
@@ -111,10 +128,27 @@ public class PermissaoAcessoService {
     private PermissaoAcesso toEntity(PermissaoAcessoDTO permissaoAcessoDTO) {
         PermissaoAcesso permissaoAcesso = new PermissaoAcesso();
         permissaoAcesso.setPermAceId(permissaoAcessoDTO.getPermAceId());
-        permissaoAcesso.setPerId(permissaoAcessoDTO.getPerId());
-        permissaoAcesso.setTelId(permissaoAcessoDTO.getTelId());
-        permissaoAcesso.setAcaId(permissaoAcessoDTO.getAcaId());
-        permissaoAcesso.setUsuId(permissaoAcessoDTO.getUsuId());
+        
+        if (permissaoAcessoDTO.getPerId() != null) {
+            perfilRepository.findById(permissaoAcessoDTO.getPerId())
+                .ifPresent(permissaoAcesso::setPerfil);
+        }
+        
+        if (permissaoAcessoDTO.getTelId() != null) {
+            telaRepository.findById(permissaoAcessoDTO.getTelId())
+                .ifPresent(permissaoAcesso::setTela);
+        }
+        
+        if (permissaoAcessoDTO.getAcaId() != null) {
+            acaoRepository.findById(permissaoAcessoDTO.getAcaId())
+                .ifPresent(permissaoAcesso::setAcao);
+        }
+        
+        if (permissaoAcessoDTO.getUsuId() != null) {
+            usuarioRepository.findById(permissaoAcessoDTO.getUsuId())
+                .ifPresent(permissaoAcesso::setUsuario);
+        }
+
         permissaoAcesso.setPermAceSta(permissaoAcessoDTO.getPermAceSta());
         permissaoAcesso.setPermAceIncPor(permissaoAcessoDTO.getPermAceIncPor());
         permissaoAcesso.setPermAceIncEm(permissaoAcessoDTO.getPermAceIncEm());

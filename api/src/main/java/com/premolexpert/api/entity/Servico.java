@@ -15,24 +15,24 @@ public class Servico {
     @Column(name = "serid", nullable = false)
     private Integer serId;
 
-
     @Column(name = "serdesc", columnDefinition = "TEXT", nullable = false)
     private String serDesc;
 
     @Column(name = "serfabricacao", columnDefinition = "TEXT", nullable = false)
     private String serFabricacao;
 
-    @Column(name = "serSessaoLargura", precision = 5, scale = 2)
+    @Column(name = "sersessaolargura", precision = 5, scale = 2)
     private BigDecimal serSessaoLargura;
 
     @Column(name = "serSessaoComprimento", precision = 5, scale = 2)
     private BigDecimal serSessaoComprimento;
 
-    @Column(name = "serSessaoAltura", precision = 5, scale = 2)
+    @Column(name = "sersessaoaltura", precision = 5, scale = 2)
     private BigDecimal serSessaoAltura;
 
-    @Column(name = "empid")
-    private Integer empId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @Column(name = "serincem")
     private LocalDateTime serIncEm;
@@ -94,12 +94,12 @@ public class Servico {
         this.serSessaoAltura = serSessaoAltura;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public LocalDateTime getSerIncEm() {

@@ -38,4 +38,7 @@ public class Funcionario extends Pessoa {
 
     public LocalDateTime getFuncioAltEm() { return funcioAltEm; }
     public void setFuncioAltEm(LocalDateTime funcioAltEm) { this.funcioAltEm = funcioAltEm; }
+
+    public Integer getFuncioId() { return getPesId(); }
+    public void setFuncioId(Integer funcioId) { setPesId(funcioId); }
 }

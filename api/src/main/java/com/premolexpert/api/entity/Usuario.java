@@ -36,8 +36,17 @@ public class Usuario extends Pessoa implements UserDetails {
     @Column(name = "usualtem")
     private LocalDateTime usuAltEm;
 
-    @Column(name = "perid")
-    private Integer perId;
+    @ManyToOne
+    @JoinColumn(name = "perid")
+    private Perfil perfil;
+
+    public Integer getUsuId() {
+        return getPesId();
+    }
+
+    public void setUsuId(Integer usuId) {
+        setPesId(usuId);
+    }
 
     public String getUsuLogin() {
         return usuLogin;
@@ -96,12 +105,12 @@ public class Usuario extends Pessoa implements UserDetails {
         this.usuAltEm = usuAltEm;
     }
 
-    public Integer getPerId() {
-        return perId;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setPerId(Integer perId) {
-        this.perId = perId;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override

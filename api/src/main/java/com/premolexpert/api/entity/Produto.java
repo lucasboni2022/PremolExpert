@@ -28,9 +28,10 @@ public class Produto {
     @Column(name = "prodaltem")
     private LocalDateTime prodAltEm;
 
-    @ManyToOne
-    @JoinColumn(name = "empid", referencedColumnName = "empid", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
     private Empresa empresa;
+
 
     @Column(name = "prodsigla", length = 2)
     private String prodSigla;

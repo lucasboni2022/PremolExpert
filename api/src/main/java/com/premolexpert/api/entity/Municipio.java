@@ -40,6 +40,10 @@ public class Municipio {
     @Column(name = "munaltem")
     private LocalDateTime munAltEm;
 
+    @ManyToOne()
+    @JoinColumn(name = "estid", insertable = false, updatable = false)
+    private Estado estado;
+
     public Integer getMunId() {
         return munId;
     }

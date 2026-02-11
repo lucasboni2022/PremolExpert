@@ -5,163 +5,175 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tborcamentopedidocustoobra")
+@Table(
+        name = "tborcamentopedidocustoobra",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"orcpedid", "sercustoid"})
+        }
+)
 public class OrcamentoPedidoCustoObra {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orcamentopedidocustoobra_seq")
-    @SequenceGenerator(name = "orcamentopedidocustoobra_seq", sequenceName = "tborcamentopedidocustoobra_orcpedcustoobrid_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orc_ped_custo_obra_seq")
+    @SequenceGenerator(
+            name = "orc_ped_custo_obra_seq",
+            sequenceName = "tborcamentopedidocustoobra_orcpedcustoobrid_seq",
+            allocationSize = 1
+    )
     @Column(name = "orcpedcustoobrid", nullable = false)
-    private Integer orcPedCustoObrId;
+    private Integer id;
 
-    @Column(name = "orcpedid")
-    private Integer orcPedId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orcpedid", nullable = false)
+    private OrcamentoPedido orcamentoPedido;
 
-    @Column(name = "sercustoid")
-    private Integer serCustoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sercustoid", nullable = false)
+    private ServicoCusto servicoCusto;
 
-    @Column(name = "uniid")
-    private Integer uniId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uniid", nullable = false)
+    private Unidade unidade;
 
     @Column(name = "orcpedcustoobrqtd")
-    private Integer orcPedCustoObrQtd;
+    private Integer quantidade;
 
     @Column(name = "orcpedcustoobrvlrunit", precision = 18, scale = 2)
-    private BigDecimal orcPedCustoObrVlrUnit;
+    private BigDecimal valorUnitario;
 
     @Column(name = "orcpedcustoobrpron")
-    private Integer orcPedCustoObrPron;
+    private Integer prazo;
 
     @Column(name = "orcpedcustoobrfaze")
-    private Integer orcPedCustoObrFaze;
+    private Integer fase;
 
     @Column(name = "orcpedcustoobrsitua")
-    private Integer orcPedCustoObrSitua;
+    private Integer situacao;
 
     @Column(name = "orcpedcustoobrtipo", length = 50)
-    private String orcPedCustoObrTipo;
+    private String tipo;
 
     @Column(name = "orcpedcustoobrincpor")
-    private Integer orcPedCustoObrIncPor;
+    private Integer incluidoPor;
 
     @Column(name = "orcpedcustoobrincem")
-    private LocalDateTime orcPedCustoObrIncEm;
+    private LocalDateTime incluidoEm;
 
     @Column(name = "orcpedcustoobraltpor")
-    private Integer orcPedCustoObrAltPor;
+    private Integer alteradoPor;
 
     @Column(name = "orcpedcustoobraltem")
-    private LocalDateTime orcPedCustoObrAltEm;
+    private LocalDateTime alteradoEm;
 
-    public Integer getOrcPedCustoObrId() {
-        return orcPedCustoObrId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrcPedCustoObrId(Integer orcPedCustoObrId) {
-        this.orcPedCustoObrId = orcPedCustoObrId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getOrcPedId() {
-        return orcPedId;
+    public OrcamentoPedido getOrcamentoPedido() {
+        return orcamentoPedido;
     }
 
-    public void setOrcPedId(Integer orcPedId) {
-        this.orcPedId = orcPedId;
+    public void setOrcamentoPedido(OrcamentoPedido orcamentoPedido) {
+        this.orcamentoPedido = orcamentoPedido;
     }
 
-    public Integer getSerCustoId() {
-        return serCustoId;
+    public ServicoCusto getServicoCusto() {
+        return servicoCusto;
     }
 
-    public void setSerCustoId(Integer serCustoId) {
-        this.serCustoId = serCustoId;
+    public void setServicoCusto(ServicoCusto servicoCusto) {
+        this.servicoCusto = servicoCusto;
     }
 
-    public Integer getUniId() {
-        return uniId;
+    public Unidade getUnidade() {
+        return unidade;
     }
 
-    public void setUniId(Integer uniId) {
-        this.uniId = uniId;
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
     }
 
-    public Integer getOrcPedCustoObrQtd() {
-        return orcPedCustoObrQtd;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setOrcPedCustoObrQtd(Integer orcPedCustoObrQtd) {
-        this.orcPedCustoObrQtd = orcPedCustoObrQtd;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public BigDecimal getOrcPedCustoObrVlrUnit() {
-        return orcPedCustoObrVlrUnit;
+    public BigDecimal getValorUnitario() {
+        return valorUnitario;
     }
 
-    public void setOrcPedCustoObrVlrUnit(BigDecimal orcPedCustoObrVlrUnit) {
-        this.orcPedCustoObrVlrUnit = orcPedCustoObrVlrUnit;
+    public void setValorUnitario(BigDecimal valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
-    public Integer getOrcPedCustoObrPron() {
-        return orcPedCustoObrPron;
+    public Integer getPrazo() {
+        return prazo;
     }
 
-    public void setOrcPedCustoObrPron(Integer orcPedCustoObrPron) {
-        this.orcPedCustoObrPron = orcPedCustoObrPron;
+    public void setPrazo(Integer prazo) {
+        this.prazo = prazo;
     }
 
-    public Integer getOrcPedCustoObrFaze() {
-        return orcPedCustoObrFaze;
+    public Integer getFase() {
+        return fase;
     }
 
-    public void setOrcPedCustoObrFaze(Integer orcPedCustoObrFaze) {
-        this.orcPedCustoObrFaze = orcPedCustoObrFaze;
+    public void setFase(Integer fase) {
+        this.fase = fase;
     }
 
-    public Integer getOrcPedCustoObrSitua() {
-        return orcPedCustoObrSitua;
+    public Integer getSituacao() {
+        return situacao;
     }
 
-    public void setOrcPedCustoObrSitua(Integer orcPedCustoObrSitua) {
-        this.orcPedCustoObrSitua = orcPedCustoObrSitua;
+    public void setSituacao(Integer situacao) {
+        this.situacao = situacao;
     }
 
-    public String getOrcPedCustoObrTipo() {
-        return orcPedCustoObrTipo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setOrcPedCustoObrTipo(String orcPedCustoObrTipo) {
-        this.orcPedCustoObrTipo = orcPedCustoObrTipo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Integer getOrcPedCustoObrIncPor() {
-        return orcPedCustoObrIncPor;
+    public Integer getIncluidoPor() {
+        return incluidoPor;
     }
 
-    public void setOrcPedCustoObrIncPor(Integer orcPedCustoObrIncPor) {
-        this.orcPedCustoObrIncPor = orcPedCustoObrIncPor;
+    public void setIncluidoPor(Integer incluidoPor) {
+        this.incluidoPor = incluidoPor;
     }
 
-    public LocalDateTime getOrcPedCustoObrIncEm() {
-        return orcPedCustoObrIncEm;
+    public LocalDateTime getIncluidoEm() {
+        return incluidoEm;
     }
 
-    public void setOrcPedCustoObrIncEm(LocalDateTime orcPedCustoObrIncEm) {
-        this.orcPedCustoObrIncEm = orcPedCustoObrIncEm;
+    public void setIncluidoEm(LocalDateTime incluidoEm) {
+        this.incluidoEm = incluidoEm;
     }
 
-    public Integer getOrcPedCustoObrAltPor() {
-        return orcPedCustoObrAltPor;
+    public Integer getAlteradoPor() {
+        return alteradoPor;
     }
 
-    public void setOrcPedCustoObrAltPor(Integer orcPedCustoObrAltPor) {
-        this.orcPedCustoObrAltPor = orcPedCustoObrAltPor;
+    public void setAlteradoPor(Integer alteradoPor) {
+        this.alteradoPor = alteradoPor;
     }
 
-    public LocalDateTime getOrcPedCustoObrAltEm() {
-        return orcPedCustoObrAltEm;
+    public LocalDateTime getAlteradoEm() {
+        return alteradoEm;
     }
 
-    public void setOrcPedCustoObrAltEm(LocalDateTime orcPedCustoObrAltEm) {
-        this.orcPedCustoObrAltEm = orcPedCustoObrAltEm;
+    public void setAlteradoEm(LocalDateTime alteradoEm) {
+        this.alteradoEm = alteradoEm;
     }
 }

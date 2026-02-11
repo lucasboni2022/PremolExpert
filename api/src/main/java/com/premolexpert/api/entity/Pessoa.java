@@ -29,11 +29,13 @@ public class Pessoa {
     @Column(name = "pesend", length = 255)
     private String pesEnd;
 
-    @Column(name = "munid")
-    private Integer munId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "munid", nullable = false)
+    private Municipio municipio;
 
-    @Column(name = "empid")
-    private Integer empId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @Column(name = "pesfisjur", length = 10)
     private String pesFisJur;
@@ -74,67 +76,171 @@ public class Pessoa {
     @Column(name = "pesaltem")
     private LocalDateTime pesAltEm;
 
-    // Getters e Setters
-    public Integer getPesId() { return pesId; }
-    public void setPesId(Integer pesId) { this.pesId = pesId; }
+    public Integer getPesId() {
+        return pesId;
+    }
 
-    public String getPesNom() { return pesNom; }
-    public void setPesNom(String pesNom) { this.pesNom = pesNom; }
+    public void setPesId(Integer pesId) {
+        this.pesId = pesId;
+    }
 
-    public String getPesCpf() { return pesCpf; }
-    public void setPesCpf(String pesCpf) { this.pesCpf = pesCpf; }
+    public String getPesNom() {
+        return pesNom;
+    }
 
-    public String getPesCnpj() { return pesCnpj; }
-    public void setPesCnpj(String pesCnpj) { this.pesCnpj = pesCnpj; }
+    public void setPesNom(String pesNom) {
+        this.pesNom = pesNom;
+    }
 
-    public String getPesEmail() { return pesEmail; }
-    public void setPesEmail(String pesEmail) { this.pesEmail = pesEmail; }
+    public String getPesCpf() {
+        return pesCpf;
+    }
 
-    public String getPesEnd() { return pesEnd; }
-    public void setPesEnd(String pesEnd) { this.pesEnd = pesEnd; }
+    public void setPesCpf(String pesCpf) {
+        this.pesCpf = pesCpf;
+    }
 
-    public Integer getMunId() { return munId; }
-    public void setMunId(Integer munId) { this.munId = munId; }
+    public String getPesCnpj() {
+        return pesCnpj;
+    }
 
-    public Integer getEmpId() { return empId; }
-    public void setEmpId(Integer empId) { this.empId = empId; }
+    public void setPesCnpj(String pesCnpj) {
+        this.pesCnpj = pesCnpj;
+    }
 
-    public String getPesFisJur() { return pesFisJur; }
-    public void setPesFisJur(String pesFisJur) { this.pesFisJur = pesFisJur; }
+    public String getPesEmail() {
+        return pesEmail;
+    }
 
-    public String getPesTelPesDDD() { return pesTelPesDDD; }
-    public void setPesTelPesDDD(String pesTelPesDDD) { this.pesTelPesDDD = pesTelPesDDD; }
+    public void setPesEmail(String pesEmail) {
+        this.pesEmail = pesEmail;
+    }
 
-    public String getPesTelPes() { return pesTelPes; }
-    public void setPesTelPes(String pesTelPes) { this.pesTelPes = pesTelPes; }
+    public String getPesEnd() {
+        return pesEnd;
+    }
 
-    public String getPesTelComDDD() { return pesTelComDDD; }
-    public void setPesTelComDDD(String pesTelComDDD) { this.pesTelComDDD = pesTelComDDD; }
+    public void setPesEnd(String pesEnd) {
+        this.pesEnd = pesEnd;
+    }
 
-    public String getPesTelCom() { return pesTelCom; }
-    public void setPesTelCom(String pesTelCom) { this.pesTelCom = pesTelCom; }
+    public Municipio getMunicipio() {
+        return municipio;
+    }
 
-    public String getPesCelPesDDD() { return pesCelPesDDD; }
-    public void setPesCelPesDDD(String pesCelPesDDD) { this.pesCelPesDDD = pesCelPesDDD; }
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 
-    public String getPesCelPes() { return pesCelPes; }
-    public void setPesCelPes(String pesCelPes) { this.pesCelPes = pesCelPes; }
+    public Empresa getEmpresa() {
+        return empresa;
+    }
 
-    public String getPesCelComDDD() { return pesCelComDDD; }
-    public void setPesCelComDDD(String pesCelComDDD) { this.pesCelComDDD = pesCelComDDD; }
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
-    public String getPesCelComPes() { return pesCelComPes; }
-    public void setPesCelComPes(String pesCelComPes) { this.pesCelComPes = pesCelComPes; }
+    public String getPesFisJur() {
+        return pesFisJur;
+    }
 
-    public Integer getPesIncPor() { return pesIncPor; }
-    public void setPesIncPor(Integer pesIncPor) { this.pesIncPor = pesIncPor; }
+    public void setPesFisJur(String pesFisJur) {
+        this.pesFisJur = pesFisJur;
+    }
 
-    public LocalDateTime getPesIncEm() { return pesIncEm; }
-    public void setPesIncEm(LocalDateTime pesIncEm) { this.pesIncEm = pesIncEm; }
+    public String getPesTelPesDDD() {
+        return pesTelPesDDD;
+    }
 
-    public Integer getPesAltPor() { return pesAltPor; }
-    public void setPesAltPor(Integer pesAltPor) { this.pesAltPor = pesAltPor; }
+    public void setPesTelPesDDD(String pesTelPesDDD) {
+        this.pesTelPesDDD = pesTelPesDDD;
+    }
 
-    public LocalDateTime getPesAltEm() { return pesAltEm; }
-    public void setPesAltEm(LocalDateTime pesAltEm) { this.pesAltEm = pesAltEm; }
+    public String getPesTelPes() {
+        return pesTelPes;
+    }
+
+    public void setPesTelPes(String pesTelPes) {
+        this.pesTelPes = pesTelPes;
+    }
+
+    public String getPesTelComDDD() {
+        return pesTelComDDD;
+    }
+
+    public void setPesTelComDDD(String pesTelComDDD) {
+        this.pesTelComDDD = pesTelComDDD;
+    }
+
+    public String getPesTelCom() {
+        return pesTelCom;
+    }
+
+    public void setPesTelCom(String pesTelCom) {
+        this.pesTelCom = pesTelCom;
+    }
+
+    public String getPesCelPesDDD() {
+        return pesCelPesDDD;
+    }
+
+    public void setPesCelPesDDD(String pesCelPesDDD) {
+        this.pesCelPesDDD = pesCelPesDDD;
+    }
+
+    public String getPesCelPes() {
+        return pesCelPes;
+    }
+
+    public void setPesCelPes(String pesCelPes) {
+        this.pesCelPes = pesCelPes;
+    }
+
+    public String getPesCelComDDD() {
+        return pesCelComDDD;
+    }
+
+    public void setPesCelComDDD(String pesCelComDDD) {
+        this.pesCelComDDD = pesCelComDDD;
+    }
+
+    public String getPesCelComPes() {
+        return pesCelComPes;
+    }
+
+    public void setPesCelComPes(String pesCelComPes) {
+        this.pesCelComPes = pesCelComPes;
+    }
+
+    public Integer getPesIncPor() {
+        return pesIncPor;
+    }
+
+    public void setPesIncPor(Integer pesIncPor) {
+        this.pesIncPor = pesIncPor;
+    }
+
+    public LocalDateTime getPesIncEm() {
+        return pesIncEm;
+    }
+
+    public void setPesIncEm(LocalDateTime pesIncEm) {
+        this.pesIncEm = pesIncEm;
+    }
+
+    public Integer getPesAltPor() {
+        return pesAltPor;
+    }
+
+    public void setPesAltPor(Integer pesAltPor) {
+        this.pesAltPor = pesAltPor;
+    }
+
+    public LocalDateTime getPesAltEm() {
+        return pesAltEm;
+    }
+
+    public void setPesAltEm(LocalDateTime pesAltEm) {
+        this.pesAltEm = pesAltEm;
+    }
 }
