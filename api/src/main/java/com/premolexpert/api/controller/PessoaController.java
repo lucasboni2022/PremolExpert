@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.PessoaDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Pessoas", acaoNom = "Consultar")
     public ResponseEntity<Page<PessoaDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -23,6 +25,7 @@ public class PessoaController {
     }
 
     @GetMapping("/search")
+    @RequiresPermission(telaNom = "Pessoas", acaoNom = "Consultar")
     public ResponseEntity<Page<PessoaDTO>> search(
             @RequestParam String nome,
             @RequestParam(defaultValue = "0") int page,

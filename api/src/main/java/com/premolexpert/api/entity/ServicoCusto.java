@@ -33,6 +33,10 @@ public class ServicoCusto {
     @Column(name = "sercustosta", length = 50)
     private String serCustoSta;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     @Column(name = "sercustoincem")
     private LocalDateTime serCustoIncEm;
 
@@ -99,6 +103,18 @@ public class ServicoCusto {
 
     public void setSerCustoSta(String serCustoSta) {
         this.serCustoSta = serCustoSta;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public LocalDateTime getSerCustoIncEm() {

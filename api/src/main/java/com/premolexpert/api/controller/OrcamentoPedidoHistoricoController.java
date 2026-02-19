@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.OrcamentoPedidoHistoricoDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.OrcamentoPedidoHistoricoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ public class OrcamentoPedidoHistoricoController {
     private OrcamentoPedidoHistoricoService orcamentoPedidoHistoricoService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Consultar")
     public ResponseEntity<Page<OrcamentoPedidoHistoricoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {

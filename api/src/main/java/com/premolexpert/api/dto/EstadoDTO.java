@@ -7,6 +7,7 @@ public class EstadoDTO {
     private Integer estId;
     private String estNom;
     private String estSigla;
+    private Integer empId;
     private Integer paisId;
     private String paisNom;
     private Integer estIncPor;
@@ -16,11 +17,12 @@ public class EstadoDTO {
 
     public EstadoDTO() {}
 
-    public EstadoDTO(Integer estId, String estNom, String estSigla, Integer paisId, String paisNom,
+    public EstadoDTO(Integer estId, String estNom, String estSigla, Integer empId, Integer paisId, String paisNom,
                      Integer estIncPor, LocalDateTime estIncEm, Integer estAltPor, LocalDateTime estAltEm) {
         this.estId = estId;
         this.estNom = estNom;
         this.estSigla = estSigla;
+        this.empId = empId;
         this.paisId = paisId;
         this.paisNom = paisNom;
         this.estIncPor = estIncPor;
@@ -37,6 +39,9 @@ public class EstadoDTO {
 
     public String getEstSigla() { return estSigla; }
     public void setEstSigla(String estSigla) { this.estSigla = estSigla; }
+
+    public Integer getEmpId() { return empId; }
+    public void setEmpId(Integer empId) { this.empId = empId; }
 
     public Integer getPaisId() { return paisId; }
     public void setPaisId(Integer paisId) { this.paisId = paisId; }

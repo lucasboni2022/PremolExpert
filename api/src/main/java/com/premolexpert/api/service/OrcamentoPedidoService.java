@@ -5,6 +5,9 @@ import com.premolexpert.api.dto.OrcamentoPedidoEtapaDTO;
 import com.premolexpert.api.entity.OrcamentoPedido;
 import com.premolexpert.api.enumeration.OrcPedEtapEnum;
 import com.premolexpert.api.repository.OrcamentoPedidoRepository;
+import com.premolexpert.api.repository.ClienteRepository;
+import com.premolexpert.api.repository.UsuarioRepository;
+import com.premolexpert.api.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,15 @@ public class OrcamentoPedidoService {
 
     @Autowired
     private OrcamentoPedidoRepository orcamentoPedidoRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
     public Page<OrcamentoPedidoDTO> getAll(int page, int size) {
         return orcamentoPedidoRepository.findAll(PageRequest.of(page, size)).map(this::toDTO);
@@ -111,12 +123,22 @@ public class OrcamentoPedidoService {
         OrcamentoPedido orcamentoPedido = new OrcamentoPedido();
         orcamentoPedido.setOrcPedId(orcamentoPedidoDTO.getOrcPedId());
         orcamentoPedido.setOrcPedNumPro(orcamentoPedidoDTO.getOrcPedNumPro());
-        orcamentoPedido.setCliId(orcamentoPedidoDTO.getCliId());
+        
+        if (orcamentoPedidoDTO.getCliId() != null) {
+            clienteRepository.findById(orcamentoPedidoDTO.getCliId())
+                .ifPresent(orcamentoPedido::setCliente);
+        }
+        
         orcamentoPedido.setOrcPedNomObr(orcamentoPedidoDTO.getOrcPedNomObr());
         orcamentoPedido.setOrcPedDatSol(orcamentoPedidoDTO.getOrcPedDatSol());
         orcamentoPedido.setOrcPedDtaPrevEnt(orcamentoPedidoDTO.getOrcPedDtaPrevEnt());
         orcamentoPedido.setOrcPedDimTam(orcamentoPedidoDTO.getOrcPedDimTam());
-        orcamentoPedido.setUsuId(orcamentoPedidoDTO.getUsuId());
+        
+        if (orcamentoPedidoDTO.getUsuId() != null) {
+            usuarioRepository.findById(orcamentoPedidoDTO.getUsuId())
+                .ifPresent(orcamentoPedido::setUsuario);
+        }
+        
         orcamentoPedido.setOrcPedEtapa(orcamentoPedidoDTO.getOrcPedEtapa());
         orcamentoPedido.setOrcPedValOrc(orcamentoPedidoDTO.getOrcPedValOrc());
         orcamentoPedido.setOrcPedDatEntPro(orcamentoPedidoDTO.getOrcPedDatEntPro());
@@ -126,8 +148,17 @@ public class OrcamentoPedidoService {
         orcamentoPedido.setOrcPedPesOrc(orcamentoPedidoDTO.getOrcPedPesOrc());
         orcamentoPedido.setOrcPedPesExe(orcamentoPedidoDTO.getOrcPedPesExe());
         orcamentoPedido.setOrcPedSalPes(orcamentoPedidoDTO.getOrcPedSalPes());
-        orcamentoPedido.setEmpId(orcamentoPedidoDTO.getEmpId());
-        orcamentoPedido.setOrcPedPaiId(orcamentoPedidoDTO.getOrcPedPaiId());
+        
+        if (orcamentoPedidoDTO.getEmpId() != null) {
+            empresaRepository.findById(orcamentoPedidoDTO.getEmpId())
+                .ifPresent(orcamentoPedido::setEmpresa);
+        }
+        
+        if (orcamentoPedidoDTO.getOrcPedPaiId() != null) {
+            orcamentoPedidoRepository.findById(orcamentoPedidoDTO.getOrcPedPaiId())
+                .ifPresent(orcamentoPedido::setOrcamentoPedidoPai);
+        }
+        
         orcamentoPedido.setOrcPedIncPor(orcamentoPedidoDTO.getOrcPedIncPor());
         orcamentoPedido.setOrcPedIncEm(orcamentoPedidoDTO.getOrcPedIncEm());
         orcamentoPedido.setOrcPedAltPor(orcamentoPedidoDTO.getOrcPedAltPor());

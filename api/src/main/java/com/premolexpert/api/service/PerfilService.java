@@ -3,6 +3,7 @@ package com.premolexpert.api.service;
 import com.premolexpert.api.dto.PerfilDTO;
 import com.premolexpert.api.entity.Perfil;
 import com.premolexpert.api.repository.PerfilRepository;
+import com.premolexpert.api.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,9 @@ public class PerfilService {
 
     @Autowired
     private PerfilRepository perfilRepository;
+
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
     public Page<PerfilDTO> getAll(int page, int size) {
         return perfilRepository.findAll(PageRequest.of(page, size)).map(this::toDTO);
@@ -81,7 +85,12 @@ public class PerfilService {
         Perfil perfil = new Perfil();
         perfil.setPerId(perfilDTO.getPerId());
         perfil.setPerNom(perfilDTO.getPerNom());
-        perfil.setEmpId(perfilDTO.getEmpId());
+
+        if (perfilDTO.getEmpId() != null) {
+            empresaRepository.findById(perfilDTO.getEmpId())
+                .ifPresent(perfil::setEmpresa);
+        }
+
         perfil.setPerIncPor(perfilDTO.getPerIncPor());
         perfil.setPerIncEm(perfilDTO.getPerIncEm());
         perfil.setPerAltPor(perfilDTO.getPerAltPor());

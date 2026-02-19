@@ -1,7 +1,8 @@
 package com.premolexpert.api.controller;
 
-import com.premolexpert.api.service.PaisService;
 import com.premolexpert.api.dto.PaisDTO;
+import com.premolexpert.api.security.RequiresPermission;
+import com.premolexpert.api.service.PaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class PaisController {
     private PaisService paisService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Países", acaoNom = "Consultar")
     public ResponseEntity<Page<PaisDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,6 +27,7 @@ public class PaisController {
     }
 
     @GetMapping("/{id}")
+    @RequiresPermission(telaNom = "Países", acaoNom = "Consultar")
     public ResponseEntity<PaisDTO> buscar(@PathVariable Integer id) {
         PaisDTO dto = paisService.getById(id);
         if (dto == null) {
@@ -34,6 +37,7 @@ public class PaisController {
     }
 
     @PostMapping
+    @RequiresPermission(telaNom = "Países", acaoNom = "Criar")
     public ResponseEntity<PaisDTO> criar(@RequestBody PaisDTO dto) {
         System.out.println("PaisDTO recebido:");
         System.out.println("ID: " + dto.getPaisId());
@@ -44,6 +48,7 @@ public class PaisController {
     }
 
     @PutMapping("/{id}")
+    @RequiresPermission(telaNom = "Países", acaoNom = "Editar")
     public ResponseEntity<PaisDTO> atualizar(@PathVariable Integer id, @RequestBody PaisDTO dto) {
         dto.setPaisId(id);
         PaisDTO saved = paisService.update(dto);
@@ -54,6 +59,7 @@ public class PaisController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Países", acaoNom = "Deletar")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         paisService.delete(id);
         return ResponseEntity.noContent().build();

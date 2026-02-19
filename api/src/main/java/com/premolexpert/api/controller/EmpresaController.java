@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.EmpresaDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Empresas", acaoNom = "Consultar")
     public ResponseEntity<Page<EmpresaDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,6 +27,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}")
+    @RequiresPermission(telaNom = "Empresas", acaoNom = "Consultar")
     public ResponseEntity<EmpresaDTO> buscar(@PathVariable Integer id) {
         EmpresaDTO dto = empresaService.getById(id);
         if (dto == null) {
@@ -34,12 +37,14 @@ public class EmpresaController {
     }
 
     @PostMapping
+    @RequiresPermission(telaNom = "Empresas", acaoNom = "Criar")
     public ResponseEntity<EmpresaDTO> criar(@RequestBody EmpresaDTO dto) {
         EmpresaDTO saved = empresaService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
+    @RequiresPermission(telaNom = "Empresas", acaoNom = "Editar")
     public ResponseEntity<EmpresaDTO> atualizar(@PathVariable Integer id, @RequestBody EmpresaDTO dto) {
         dto.setEmpId(id);
         EmpresaDTO saved = empresaService.update(dto);
@@ -50,6 +55,7 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Empresas", acaoNom = "Deletar")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         empresaService.delete(id);
         return ResponseEntity.noContent().build();

@@ -16,14 +16,13 @@ public class Municipio {
     @Column(name = "munnom", length = 100, nullable = false)
     private String munNom;
 
-    @Column(name = "estid")
-    private Integer estId;
+    @ManyToOne
+    @JoinColumn(name = "empid")
+    private Empresa empresa;
 
-    @Column(name = "empid")
-    private Integer empId;
-
-    @Column(name = "munmunorigid")
-    private Integer munMunOrigId;
+    @ManyToOne
+    @JoinColumn(name = "munmunorigid")
+    private Municipio municipioOrigem;
 
     @Column(name = "munativo")
     private Boolean munAtivo = true;
@@ -41,7 +40,7 @@ public class Municipio {
     private LocalDateTime munAltEm;
 
     @ManyToOne()
-    @JoinColumn(name = "estid", insertable = false, updatable = false)
+    @JoinColumn(name = "estid")
     private Estado estado;
 
     public Integer getMunId() {
@@ -61,11 +60,7 @@ public class Municipio {
     }
 
     public Integer getEstId() {
-        return estId;
-    }
-
-    public void setEstId(Integer estId) {
-        this.estId = estId;
+        return estado != null ? estado.getEstId() : null;
     }
 
     public Estado getEstado() {
@@ -76,20 +71,28 @@ public class Municipio {
         this.estado = estado;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
+    }
+
+    public Municipio getMunicipioOrigem() {
+        return municipioOrigem;
+    }
+
+    public void setMunicipioOrigem(Municipio municipioOrigem) {
+        this.municipioOrigem = municipioOrigem;
     }
 
     public Integer getMunMunOrigId() {
-        return munMunOrigId;
-    }
-
-    public void setMunMunOrigId(Integer munMunOrigId) {
-        this.munMunOrigId = munMunOrigId;
+        return municipioOrigem != null ? municipioOrigem.getMunId() : null;
     }
 
     public Boolean getMunAtivo() {

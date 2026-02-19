@@ -1,5 +1,6 @@
 package com.premolexpert.api.dto;
 
+import com.premolexpert.api.enumeration.SimNaoEnum;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,7 +9,7 @@ public class ServicoDTO {
 
     private Integer serId;
     private String serDesc;
-    private String serFabricacao;
+    private SimNaoEnum serFabricacao;
     private BigDecimal serSessaoLargura;
     private BigDecimal serSessaoComprimento;
     private BigDecimal serSessaoAltura;
@@ -34,11 +35,11 @@ public class ServicoDTO {
         this.serDesc = serDesc;
     }
 
-    public String getSerFabricacao() {
+    public SimNaoEnum getSerFabricacao() {
         return serFabricacao;
     }
 
-    public void setSerFabricacao(String serFabricacao) {
+    public void setSerFabricacao(SimNaoEnum serFabricacao) {
         this.serFabricacao = serFabricacao;
     }
 

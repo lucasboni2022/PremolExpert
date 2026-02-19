@@ -3,6 +3,7 @@ package com.premolexpert.api.service;
 import com.premolexpert.api.dto.OrcamentoPedidoHistoricoDTO;
 import com.premolexpert.api.entity.OrcamentoPedidoHistorico;
 import com.premolexpert.api.repository.OrcamentoPedidoHistoricoRepository;
+import com.premolexpert.api.repository.OrcamentoPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,9 @@ public class OrcamentoPedidoHistoricoService {
 
     @Autowired
     private OrcamentoPedidoHistoricoRepository orcamentoPedidoHistoricoRepository;
+
+    @Autowired
+    private OrcamentoPedidoRepository orcamentoPedidoRepository;
 
     public Page<OrcamentoPedidoHistoricoDTO> getAll(int page, int size) {
         return orcamentoPedidoHistoricoRepository.findAll(PageRequest.of(page, size)).map(this::toDTO);
@@ -74,7 +78,12 @@ public class OrcamentoPedidoHistoricoService {
     private OrcamentoPedidoHistorico toEntity(OrcamentoPedidoHistoricoDTO orcamentoPedidoHistoricoDTO) {
         OrcamentoPedidoHistorico orcamentoPedidoHistorico = new OrcamentoPedidoHistorico();
         orcamentoPedidoHistorico.setOrcPedHistId(orcamentoPedidoHistoricoDTO.getOrcPedHistId());
-        orcamentoPedidoHistorico.setOrcPedId(orcamentoPedidoHistoricoDTO.getOrcPedId());
+        
+        if (orcamentoPedidoHistoricoDTO.getOrcPedId() != null) {
+            orcamentoPedidoRepository.findById(orcamentoPedidoHistoricoDTO.getOrcPedId())
+                .ifPresent(orcamentoPedidoHistorico::setOrcamentoPedido);
+        }
+        
         orcamentoPedidoHistorico.setOrcPedEtapa(orcamentoPedidoHistoricoDTO.getOrcPedEtapa());
         orcamentoPedidoHistorico.setOrcPedHistIncPor(orcamentoPedidoHistoricoDTO.getOrcPedHistIncPor());
         orcamentoPedidoHistorico.setOrcPedHistIncEm(orcamentoPedidoHistoricoDTO.getOrcPedHistIncEm());

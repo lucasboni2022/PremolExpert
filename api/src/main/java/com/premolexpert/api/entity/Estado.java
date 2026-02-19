@@ -23,11 +23,12 @@ public class Estado {
     @Column(name = "estsigla", length = 2, nullable = false)
     private String estSigla;
 
-    @Column(name = "paisid", nullable = false)
-    private Integer paisId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @ManyToOne()
-    @JoinColumn(name = "paisid", insertable = false, updatable = false)
+    @JoinColumn(name = "paisid")
     private Pais pais;
 
     @Column(name = "estincpor")
@@ -41,8 +42,6 @@ public class Estado {
 
     @Column(name = "estaltem")
     private LocalDateTime estAltEm;
-
-    // ===== getters e setters =====
 
     public Integer getEstId() {
         return estId;
@@ -68,21 +67,21 @@ public class Estado {
         this.estSigla = estSigla;
     }
 
-    public Integer getPaisId() {
-        return paisId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPaisId(Integer paisId) {
-        this.paisId = paisId;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
-   public Pais getPais(){
+    public Pais getPais() {
         return pais;
-   }
+    }
 
-   public void setPais(Pais pais){
+    public void setPais(Pais pais) {
         this.pais = pais;
-   }
+    }
 
     public Integer getEstIncPor() {
         return estIncPor;

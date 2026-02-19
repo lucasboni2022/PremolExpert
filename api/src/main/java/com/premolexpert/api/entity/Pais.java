@@ -20,6 +20,10 @@ public class Pais {
     @Column(name = "paissigla", nullable = false)
     private String paisSigla;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     @Column(name = "paisincpor", nullable = true)
     private Integer paisIncPor;
 
@@ -32,16 +36,37 @@ public class Pais {
     @Column(name = "paisaltem", nullable = true)
     private LocalDateTime paisAltEm;
 
-
-
-    public Integer getPaisAltPor() {
-        return paisAltPor;
+    public Integer getPaisId() {
+        return paisId;
     }
 
-    public void setPaisAltPor(Integer paisAltPor) {
-        this.paisAltPor = paisAltPor;
+    public void setPaisId(Integer paisId) {
+        this.paisId = paisId;
     }
 
+    public String getPaisNom() {
+        return paisNom;
+    }
+
+    public void setPaisNom(String paisNom) {
+        this.paisNom = paisNom;
+    }
+
+    public String getPaisSigla() {
+        return paisSigla;
+    }
+
+    public void setPaisSigla(String paisSigla) {
+        this.paisSigla = paisSigla;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
     public Integer getPaisIncPor() {
         return paisIncPor;
@@ -59,6 +84,14 @@ public class Pais {
         this.paisIncEm = paisIncEm;
     }
 
+    public Integer getPaisAltPor() {
+        return paisAltPor;
+    }
+
+    public void setPaisAltPor(Integer paisAltPor) {
+        this.paisAltPor = paisAltPor;
+    }
+
     public LocalDateTime getPaisAltEm() {
         return paisAltEm;
     }
@@ -66,31 +99,4 @@ public class Pais {
     public void setPaisAltEm(LocalDateTime paisAltEm) {
         this.paisAltEm = paisAltEm;
     }
-
-    public Integer getPaisId() {
-        return paisId;
-    }
-
-   public void setPaisId(Integer paisId) {
-        this.paisId = paisId;
-    }
-
-    public String getPaisNom() {
-        return paisNom;
-    }
-
-    public void setPaisNom(String paisNom) {
-        this.paisNom = paisNom;
-    }
-
-    public String getPaisSigla() {
-        return paisSigla;
-    }
-
-
-    public void setPaisSigla(String paisSigla) {
-        this.paisSigla = paisSigla;
-    }
-
-
 }

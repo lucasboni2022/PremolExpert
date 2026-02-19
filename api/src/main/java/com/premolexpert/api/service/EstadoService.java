@@ -16,12 +16,19 @@ public class EstadoService {
     @Autowired
     private EstadoRepository estadoRepository;
 
+    @Autowired
+    private com.premolexpert.api.repository.PaisRepository paisRepository;
+
+    @Autowired
+    private com.premolexpert.api.repository.EmpresaRepository empresaRepository;
+
     private EstadoDTO toDTO(Estado estado) {
         return new EstadoDTO(
                 estado.getEstId(),
                 estado.getEstNom(),
                 estado.getEstSigla(),
-                estado.getPaisId(),
+                estado.getEmpresa() != null ? estado.getEmpresa().getEmpId() : null,
+                estado.getPais() != null ? estado.getPais().getPaisId() : null,
                 estado.getPais() != null ? estado.getPais().getPaisNom() : null,
                 estado.getEstIncPor(),
                 estado.getEstIncEm(),
@@ -35,7 +42,15 @@ public class EstadoService {
         estado.setEstId(estadoDTO.getEstId());
         estado.setEstNom(estadoDTO.getEstNom());
         estado.setEstSigla(estadoDTO.getEstSigla());
-        estado.setPaisId(estadoDTO.getPaisId());
+        
+        if (estadoDTO.getEmpId() != null) {
+            empresaRepository.findById(estadoDTO.getEmpId()).ifPresent(estado::setEmpresa);
+        }
+
+        if (estadoDTO.getPaisId() != null) {
+            paisRepository.findById(estadoDTO.getPaisId()).ifPresent(estado::setPais);
+        }
+        
         estado.setEstIncPor(estadoDTO.getEstIncPor());
         estado.setEstIncEm(estadoDTO.getEstIncEm());
         estado.setEstAltPor(estadoDTO.getEstAltPor());

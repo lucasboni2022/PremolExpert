@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.ServicoDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,8 @@ public class ServicoController {
     private ServicoService servicoService;
 
     @GetMapping
-    public ResponseEntity<Page<ServicoDTO>> listar(
+    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    public ResponseEntity<Page<ServicoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Page<ServicoDTO> result = servicoService.getAll(page, size);
@@ -25,7 +27,8 @@ public class ServicoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ServicoDTO> buscar(@PathVariable Integer id) {
+    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    public ResponseEntity<ServicoDTO> getById(@PathVariable Integer id) {
         ServicoDTO dto = servicoService.getById(id);
         if (dto == null) {
             return ResponseEntity.notFound().build();
@@ -34,13 +37,15 @@ public class ServicoController {
     }
 
     @PostMapping
-    public ResponseEntity<ServicoDTO> criar(@RequestBody ServicoDTO dto) {
+    @RequiresPermission(telaNom = "Serviços", acaoNom = "Criar")
+    public ResponseEntity<ServicoDTO> create(@RequestBody ServicoDTO dto) {
         ServicoDTO saved = servicoService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ServicoDTO> atualizar(@PathVariable Integer id, @RequestBody ServicoDTO dto) {
+    @RequiresPermission(telaNom = "Serviços", acaoNom = "Editar")
+    public ResponseEntity<ServicoDTO> update(@PathVariable Integer id, @RequestBody ServicoDTO dto) {
         dto.setSerId(id);
         ServicoDTO saved = servicoService.update(dto);
         if (saved == null) {
@@ -50,7 +55,8 @@ public class ServicoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+    @RequiresPermission(telaNom = "Serviços", acaoNom = "Deletar")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         servicoService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -7,8 +7,17 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "tbcliente")
-@PrimaryKeyJoinColumn(name = "pesid")
-public class Cliente extends Pessoa {
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_seq")
+    @SequenceGenerator(name = "cliente_seq", sequenceName = "tbcliente_cliid_seq", allocationSize = 1)
+    @Column(name = "cliid")
+    private Integer cliId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pesid")
+    private Pessoa pessoa;
 
     @Column(name = "cliobs", columnDefinition = "TEXT")
     private String cliObs;
@@ -25,7 +34,21 @@ public class Cliente extends Pessoa {
     @Column(name = "clialtem")
     private LocalDateTime cliAltEm;
 
-    // getters e setters
+    public Integer getCliId() {
+        return cliId;
+    }
+
+    public void setCliId(Integer cliId) {
+        this.cliId = cliId;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
     public String getCliObs() {
         return cliObs;
@@ -65,13 +88,5 @@ public class Cliente extends Pessoa {
 
     public void setCliAltEm(LocalDateTime cliAltEm) {
         this.cliAltEm = cliAltEm;
-    }
-
-    public Integer getCliId() {
-        return getPesId();
-    }
-
-    public void setCliId(Integer cliId) {
-        setPesId(cliId);
     }
 }

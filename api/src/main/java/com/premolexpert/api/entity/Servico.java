@@ -1,5 +1,6 @@
 package com.premolexpert.api.entity;
 
+import com.premolexpert.api.enumeration.SimNaoEnum;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,8 +19,9 @@ public class Servico {
     @Column(name = "serdesc", columnDefinition = "TEXT", nullable = false)
     private String serDesc;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "serfabricacao", columnDefinition = "TEXT", nullable = false)
-    private String serFabricacao;
+    private SimNaoEnum serFabricacao;
 
     @Column(name = "sersessaolargura", precision = 5, scale = 2)
     private BigDecimal serSessaoLargura;
@@ -62,11 +64,11 @@ public class Servico {
         this.serDesc = serDesc;
     }
 
-    public String getSerFabricacao() {
+    public SimNaoEnum getSerFabricacao() {
         return serFabricacao;
     }
 
-    public void setSerFabricacao(String serFabricacao) {
+    public void setSerFabricacao(SimNaoEnum serFabricacao) {
         this.serFabricacao = serFabricacao;
     }
 
@@ -100,6 +102,10 @@ public class Servico {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public LocalDateTime getSerIncEm() {

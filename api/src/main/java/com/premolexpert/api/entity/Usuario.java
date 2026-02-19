@@ -11,8 +11,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "tbusuario")
-@PrimaryKeyJoinColumn(name = "usuid")
-public class Usuario extends Pessoa implements UserDetails {
+public class Usuario implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
+    @SequenceGenerator(name = "usuario_seq", sequenceName = "tbusuario_usuid_seq", allocationSize = 1)
+    @Column(name = "usuid")
+    private Integer usuId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pesid")
+    private Pessoa pessoa;
 
     @Column(name = "usulogin", length = 50, nullable = false, unique = true)
     private String usuLogin;
@@ -20,6 +29,9 @@ public class Usuario extends Pessoa implements UserDetails {
     @Column(name = "ususenha", length = 255)
     private String usuSenha;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @Column(name = "usuativo")
     private Boolean usuAtivo;
@@ -41,11 +53,23 @@ public class Usuario extends Pessoa implements UserDetails {
     private Perfil perfil;
 
     public Integer getUsuId() {
-        return getPesId();
+        return usuId;
     }
 
     public void setUsuId(Integer usuId) {
-        setPesId(usuId);
+        this.usuId = usuId;
+    }
+
+    public Integer getPesId() {
+        return pessoa != null ? pessoa.getPesId() : null;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public String getUsuLogin() {
@@ -64,6 +88,17 @@ public class Usuario extends Pessoa implements UserDetails {
         this.usuSenha = usuSenha;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
+    }
 
     public Boolean getUsuAtivo() {
         return usuAtivo;
@@ -115,6 +150,11 @@ public class Usuario extends Pessoa implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Se o usuário tem um perfil, retorna as autoridades baseadas no perfil
+        if (this.perfil != null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_" + this.perfil.getPerNom().toUpperCase().replace(" ", "_")));
+        }
+        // Caso contrário, retorna ROLE_USER como padrão
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 

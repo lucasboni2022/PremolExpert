@@ -16,6 +16,10 @@ public class Tela {
     @Column(name = "telnom", length = 100, nullable = false)
     private String telNom;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     @Column(name = "telincpor")
     private Integer telIncPor;
 
@@ -42,6 +46,18 @@ public class Tela {
 
     public void setTelNom(String telNom) {
         this.telNom = telNom;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public Integer getTelIncPor() {

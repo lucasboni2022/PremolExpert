@@ -38,7 +38,7 @@ public class OrcamentoPedidoCustoObra {
     @Column(name = "orcpedcustoobrqtd")
     private Integer quantidade;
 
-    @Column(name = "orcpedcustoobrvlrunit", precision = 18, scale = 2)
+    @Column(name = "orcpedcustoobrVlrUnit", precision = 18, scale = 2)
     private BigDecimal valorUnitario;
 
     @Column(name = "orcpedcustoobrpron")
@@ -52,6 +52,11 @@ public class OrcamentoPedidoCustoObra {
 
     @Column(name = "orcpedcustoobrtipo", length = 50)
     private String tipo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
 
     @Column(name = "orcpedcustoobrincpor")
     private Integer incluidoPor;
@@ -81,6 +86,10 @@ public class OrcamentoPedidoCustoObra {
         this.orcamentoPedido = orcamentoPedido;
     }
 
+    public Integer getOrcPedId() {
+        return orcamentoPedido != null ? orcamentoPedido.getOrcPedId() : null;
+    }
+
     public ServicoCusto getServicoCusto() {
         return servicoCusto;
     }
@@ -89,12 +98,20 @@ public class OrcamentoPedidoCustoObra {
         this.servicoCusto = servicoCusto;
     }
 
+    public Integer getSerCustoId() {
+        return servicoCusto != null ? servicoCusto.getSerCustoId() : null;
+    }
+
     public Unidade getUnidade() {
         return unidade;
     }
 
     public void setUnidade(Unidade unidade) {
         this.unidade = unidade;
+    }
+
+    public Integer getUniId() {
+        return unidade != null ? unidade.getUniId() : null;
     }
 
     public Integer getQuantidade() {
@@ -143,6 +160,18 @@ public class OrcamentoPedidoCustoObra {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public Integer getIncluidoPor() {

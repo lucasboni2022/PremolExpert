@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.ClienteDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 @CrossOrigin(origins = "*")
 public class ClienteController {
 
@@ -19,6 +20,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Clientes", acaoNom = "Consultar")
     public ResponseEntity<Page<ClienteDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -26,6 +28,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
+    @RequiresPermission(telaNom = "Clientes", acaoNom = "Consultar")
     public ResponseEntity<ClienteDTO> getById(@PathVariable Integer id) {
         ClienteDTO dto = clienteService.getById(id);
         if (dto != null) {
@@ -35,6 +38,7 @@ public class ClienteController {
     }
 
     @PostMapping
+    @RequiresPermission(telaNom = "Clientes", acaoNom = "Criar")
     public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO dto) {
         ClienteDTO saved = clienteService.create(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -45,6 +49,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
+    @RequiresPermission(telaNom = "Clientes", acaoNom = "Editar")
     public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @RequestBody ClienteDTO dto) {
         dto.setPesId(id);
         ClienteDTO updated = clienteService.update(dto);
@@ -55,6 +60,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Clientes", acaoNom = "Deletar")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         clienteService.delete(id);
         return ResponseEntity.noContent().build();

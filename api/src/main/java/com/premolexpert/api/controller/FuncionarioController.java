@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.FuncionarioDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/funcionarios")
+@RequestMapping("/funcionario")
 @CrossOrigin(origins = "*")
 public class FuncionarioController {
 
@@ -55,6 +56,7 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Funcionários", acaoNom = "Deletar")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         funcionarioService.delete(id);
         return ResponseEntity.noContent().build();

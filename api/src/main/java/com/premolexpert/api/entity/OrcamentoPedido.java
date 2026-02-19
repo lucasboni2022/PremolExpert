@@ -19,8 +19,9 @@ public class OrcamentoPedido {
     @Column(name = "orcpednumpro", length = 20)
     private String orcPedNumPro;
 
-    @Column(name = "cliid")
-    private Integer cliId;
+    @ManyToOne
+    @JoinColumn(name = "cliid")
+    private Cliente cliente;
 
     @Column(name = "orcpednomobr", length = 255)
     private String orcPedNomObr;
@@ -34,8 +35,9 @@ public class OrcamentoPedido {
     @Column(name = "orcpeddimtam", length = 100)
     private String orcPedDimTam;
 
-    @Column(name = "usuid")
-    private Integer usuId;
+    @ManyToOne
+    @JoinColumn(name = "usuid")
+    private Usuario usuario;
 
     @Column(name = "orcpedetapa")
     private OrcPedEtapEnum orcPedEtapa;
@@ -72,11 +74,13 @@ public class OrcamentoPedido {
     @Column(name = "orcpedsalpes", precision = 18, scale = 2)
     private BigDecimal orcPedSalPes;
 
-    @Column(name = "empid")
-    private Integer empId;
+    @ManyToOne
+    @JoinColumn(name = "empid")
+    private Empresa empresa;
 
-    @Column(name = "orcpedpaiid")
-    private Integer orcPedPaiId;
+    @ManyToOne
+    @JoinColumn(name = "orcpedpaiid")
+    private OrcamentoPedido orcamentoPedidoPai;
 
     @Column(name = "orcpedincpor")
     private Integer orcPedIncPor;
@@ -89,6 +93,54 @@ public class OrcamentoPedido {
 
     @Column(name = "orcpedaltem")
     private LocalDateTime orcPedAltEm;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Integer getCliId() {
+        return cliente != null ? cliente.getCliId() : null;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Integer getUsuId() {
+        return usuario != null ? usuario.getUsuId() : null;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
+    }
+
+    public OrcamentoPedido getOrcamentoPedidoPai() {
+        return orcamentoPedidoPai;
+    }
+
+    public void setOrcamentoPedidoPai(OrcamentoPedido orcamentoPedidoPai) {
+        this.orcamentoPedidoPai = orcamentoPedidoPai;
+    }
+
+    public Integer getOrcPedPaiId() {
+        return orcamentoPedidoPai != null ? orcamentoPedidoPai.getOrcPedId() : null;
+    }
 
     public Integer getOrcPedId() {
         return orcPedId;
@@ -106,13 +158,7 @@ public class OrcamentoPedido {
         this.orcPedNumPro = orcPedNumPro;
     }
 
-    public Integer getCliId() {
-        return cliId;
-    }
 
-    public void setCliId(Integer cliId) {
-        this.cliId = cliId;
-    }
 
     public String getOrcPedNomObr() {
         return orcPedNomObr;
@@ -146,13 +192,7 @@ public class OrcamentoPedido {
         this.orcPedDimTam = orcPedDimTam;
     }
 
-    public Integer getUsuId() {
-        return usuId;
-    }
 
-    public void setUsuId(Integer usuId) {
-        this.usuId = usuId;
-    }
 
 
     public BigDecimal getOrcPedValOrc() {
@@ -217,22 +257,6 @@ public class OrcamentoPedido {
 
     public void setOrcPedSalPes(BigDecimal orcPedSalPes) {
         this.orcPedSalPes = orcPedSalPes;
-    }
-
-    public Integer getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
-    }
-
-    public Integer getOrcPedPaiId() {
-        return orcPedPaiId;
-    }
-
-    public void setOrcPedPaiId(Integer orcPedPaiId) {
-        this.orcPedPaiId = orcPedPaiId;
     }
 
     public Integer getOrcPedIncPor() {

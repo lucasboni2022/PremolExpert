@@ -16,6 +16,10 @@ public class Acao {
     @Column(name = "acanom", length = 100, nullable = false)
     private String acaNom;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     @Column(name = "acaincpor")
     private Integer acaIncPor;
 
@@ -42,6 +46,18 @@ public class Acao {
 
     public void setAcaNom(String acaNom) {
         this.acaNom = acaNom;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public Integer getAcaIncPor() {

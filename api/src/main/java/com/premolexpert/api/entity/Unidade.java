@@ -15,6 +15,10 @@ public class Unidade {
     @Column(name = "uninom", length = 100)
     private String uniNom;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     public Integer getUniId() {
         return uniId;
     }
@@ -29,5 +33,17 @@ public class Unidade {
 
     public void setUniNom(String uniNom) {
         this.uniNom = uniNom;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 }

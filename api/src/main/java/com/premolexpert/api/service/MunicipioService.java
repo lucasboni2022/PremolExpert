@@ -3,6 +3,8 @@ package com.premolexpert.api.service;
 import com.premolexpert.api.dto.MunicipioDTO;
 import com.premolexpert.api.entity.Municipio;
 import com.premolexpert.api.repository.MunicipioRepository;
+import com.premolexpert.api.repository.EmpresaRepository;
+import com.premolexpert.api.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,12 @@ public class MunicipioService {
 
     @Autowired
     private MunicipioRepository municipioRepository;
+
+    @Autowired
+    private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     private MunicipioDTO toDTO(Municipio municipio) {
         return new MunicipioDTO(
@@ -37,9 +45,22 @@ public class MunicipioService {
         Municipio municipio = new Municipio();
         municipio.setMunId(municipioDTO.getMunId());
         municipio.setMunNom(municipioDTO.getMunNom());
-        municipio.setEstId(municipioDTO.getEstId());
-        municipio.setEmpId(municipioDTO.getEmpId());
-        municipio.setMunMunOrigId(municipioDTO.getMunMunOrigId());
+        
+        if (municipioDTO.getEstId() != null) {
+            estadoRepository.findById(municipioDTO.getEstId())
+                .ifPresent(municipio::setEstado);
+        }
+        
+        if (municipioDTO.getEmpId() != null) {
+            empresaRepository.findById(municipioDTO.getEmpId())
+                .ifPresent(municipio::setEmpresa);
+        }
+        
+        if (municipioDTO.getMunMunOrigId() != null) {
+            municipioRepository.findById(municipioDTO.getMunMunOrigId())
+                .ifPresent(municipio::setMunicipioOrigem);
+        }
+
         municipio.setMunAtivo(municipioDTO.getMunAtivo());
         municipio.setMunIncPor(municipioDTO.getMunIncPor());
         municipio.setMunIncEm(municipioDTO.getMunIncEm());

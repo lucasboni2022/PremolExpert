@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbpessoa")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
 
     @Id

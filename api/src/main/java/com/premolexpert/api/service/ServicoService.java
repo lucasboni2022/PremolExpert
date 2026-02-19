@@ -80,7 +80,12 @@ public class ServicoService {
         servico.setSerIncEm(LocalDateTime.now());
         servico.setSerAltPor(null);
         servico.setSerAltEm(null);
-        
+
+        if (servicoDTO.getEmpId() != null) {
+            empresaRepository.findById(servicoDTO.getEmpId())
+                .ifPresent(servico::setEmpresa);
+        }
+
         Servico saved = servicoRepository.save(servico);
         return toDTO(saved);
     }

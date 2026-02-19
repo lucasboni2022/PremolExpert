@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.TelaDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.TelaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ public class TelaController {
     private TelaService telaService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Telas", acaoNom = "Consultar")
     public ResponseEntity<Page<TelaDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -23,17 +25,20 @@ public class TelaController {
     }
 
     @GetMapping("/{id}")
+    @RequiresPermission(telaNom = "Telas", acaoNom = "Consultar")
     public ResponseEntity<TelaDTO> getById(@PathVariable Integer id) {
         TelaDTO dto = telaService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
+    @RequiresPermission(telaNom = "Telas", acaoNom = "Criar")
     public ResponseEntity<TelaDTO> create(@RequestBody TelaDTO dto) {
         return ResponseEntity.ok(telaService.create(dto));
     }
 
     @PutMapping("/{id}")
+    @RequiresPermission(telaNom = "Telas", acaoNom = "Editar")
     public ResponseEntity<TelaDTO> update(@PathVariable Integer id, @RequestBody TelaDTO dto) {
         dto.setTelId(id);
         TelaDTO updated = telaService.update(dto);
@@ -41,6 +46,7 @@ public class TelaController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Telas", acaoNom = "Deletar")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         telaService.delete(id);
         return ResponseEntity.noContent().build();

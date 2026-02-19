@@ -19,20 +19,24 @@ public class PermissaoAcesso {
 
 
     @ManyToOne
-    @JoinColumn(name = "perid", insertable = false, updatable = false)
+    @JoinColumn(name = "perid")
     private Perfil perfil;
 
     @ManyToOne
-    @JoinColumn(name = "telid", insertable = false, updatable = false)
+    @JoinColumn(name = "telid")
     private Tela tela;
 
     @ManyToOne
-    @JoinColumn(name = "acaid", insertable = false, updatable = false)
+    @JoinColumn(name = "acaid")
     private Acao acao;
 
     @ManyToOne
-    @JoinColumn(name = "usuid", insertable = false, updatable = false)
+    @JoinColumn(name = "usuid")
     private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @Column(name = "permacesta")
     private Integer permAceSta;
@@ -95,6 +99,18 @@ public class PermissaoAcesso {
 
     public void setPermAceSta(Integer permAceSta) {
         this.permAceSta = permAceSta;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public Integer getPermAceIncPor() {

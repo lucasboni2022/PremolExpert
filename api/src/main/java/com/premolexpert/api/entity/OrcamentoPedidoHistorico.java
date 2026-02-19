@@ -13,8 +13,9 @@ public class OrcamentoPedidoHistorico {
     @Column(name = "orcpedhistid", nullable = false)
     private Integer orcPedHistId;
 
-    @Column(name = "orcpedid")
-    private Integer orcPedId;
+    @ManyToOne
+    @JoinColumn(name = "orcpedid")
+    private OrcamentoPedido orcamentoPedido;
 
     @Column(name = "orcpedetapa")
     private Integer orcPedEtapa;
@@ -28,6 +29,10 @@ public class OrcamentoPedidoHistorico {
     @Column(name = "orcpedhistobs", length = 100)
     private String orcPedHistObs;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
+
     public Integer getOrcPedHistId() {
         return orcPedHistId;
     }
@@ -36,12 +41,16 @@ public class OrcamentoPedidoHistorico {
         this.orcPedHistId = orcPedHistId;
     }
 
-    public Integer getOrcPedId() {
-        return orcPedId;
+    public OrcamentoPedido getOrcamentoPedido() {
+        return orcamentoPedido;
     }
 
-    public void setOrcPedId(Integer orcPedId) {
-        this.orcPedId = orcPedId;
+    public void setOrcamentoPedido(OrcamentoPedido orcamentoPedido) {
+        this.orcamentoPedido = orcamentoPedido;
+    }
+
+    public Integer getOrcPedId() {
+        return orcamentoPedido != null ? orcamentoPedido.getOrcPedId() : null;
     }
 
     public Integer getOrcPedEtapa() {
@@ -74,5 +83,17 @@ public class OrcamentoPedidoHistorico {
 
     public void setOrcPedHistObs(String orcPedHistObs) {
         this.orcPedHistObs = orcPedHistObs;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 }

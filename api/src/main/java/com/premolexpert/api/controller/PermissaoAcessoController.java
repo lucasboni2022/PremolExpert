@@ -1,6 +1,7 @@
 package com.premolexpert.api.controller;
 
 import com.premolexpert.api.dto.PermissaoAcessoDTO;
+import com.premolexpert.api.security.RequiresPermission;
 import com.premolexpert.api.service.PermissaoAcessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ public class PermissaoAcessoController {
     private PermissaoAcessoService permissaoAcessoService;
 
     @GetMapping
+    @RequiresPermission(telaNom = "Permissões", acaoNom = "Consultar")
     public ResponseEntity<Page<PermissaoAcessoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -24,6 +26,7 @@ public class PermissaoAcessoController {
     }
 
     @GetMapping("/{id}")
+    @RequiresPermission(telaNom = "Permissões", acaoNom = "Consultar")
     public ResponseEntity<PermissaoAcessoDTO> getById(@PathVariable Integer id) {
         PermissaoAcessoDTO dto = permissaoAcessoService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
@@ -35,11 +38,13 @@ public class PermissaoAcessoController {
     }
 
     @PostMapping
+    @RequiresPermission(telaNom = "Permissões", acaoNom = "Criar")
     public ResponseEntity<PermissaoAcessoDTO> create(@RequestBody PermissaoAcessoDTO dto) {
         return ResponseEntity.ok(permissaoAcessoService.create(dto));
     }
 
     @PutMapping("/{id}")
+    @RequiresPermission(telaNom = "Permissões", acaoNom = "Editar")
     public ResponseEntity<PermissaoAcessoDTO> update(@PathVariable Integer id, @RequestBody PermissaoAcessoDTO dto) {
         dto.setPermAceId(id);
         PermissaoAcessoDTO updated = permissaoAcessoService.update(dto);
@@ -47,6 +52,7 @@ public class PermissaoAcessoController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiresPermission(telaNom = "Permissões", acaoNom = "Deletar")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         permissaoAcessoService.delete(id);
         return ResponseEntity.noContent().build();

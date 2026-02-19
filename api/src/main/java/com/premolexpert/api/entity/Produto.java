@@ -101,6 +101,10 @@ public class Produto {
         this.empresa = empresa;
     }
 
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
+    }
+
     public String getProdSigla() {
         return prodSigla;
     }

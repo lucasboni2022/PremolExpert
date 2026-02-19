@@ -16,8 +16,9 @@ public class Perfil {
     @Column(name = "pernom", length = 100, nullable = false)
     private String perNom;
 
-    @Column(name = "empid")
-    private Integer empId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empid", nullable = false)
+    private Empresa empresa;
 
     @Column(name = "perincpor")
     private Integer perIncPor;
@@ -47,12 +48,16 @@ public class Perfil {
         this.perNom = perNom;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Integer getEmpId() {
+        return empresa != null ? empresa.getEmpId() : null;
     }
 
     public Integer getPerIncPor() {
