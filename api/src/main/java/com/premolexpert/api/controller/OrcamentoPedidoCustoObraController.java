@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orcamentopedidocustoobra")
-@CrossOrigin(origins = "*")
 public class OrcamentoPedidoCustoObraController {
 
     @Autowired
     private OrcamentoPedidoCustoObraService orcamentoPedidoCustoObraService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Consultar")
+   // @RequiresPermission(telaNom = "Orçamento", acaoNom = "Consultar")
     public ResponseEntity<Page<OrcamentoPedidoCustoObraDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,20 +24,20 @@ public class OrcamentoPedidoCustoObraController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Consultar")
     public ResponseEntity<OrcamentoPedidoCustoObraDTO> getById(@PathVariable Integer id) {
         OrcamentoPedidoCustoObraDTO dto = orcamentoPedidoCustoObraService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Inserir")
     public ResponseEntity<OrcamentoPedidoCustoObraDTO> create(@RequestBody OrcamentoPedidoCustoObraDTO dto) {
         return ResponseEntity.ok(orcamentoPedidoCustoObraService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Alterar")
     public ResponseEntity<OrcamentoPedidoCustoObraDTO> update(@PathVariable Integer id, @RequestBody OrcamentoPedidoCustoObraDTO dto) {
         dto.setOrcPedCustoObrId(id);
         OrcamentoPedidoCustoObraDTO updated = orcamentoPedidoCustoObraService.update(dto);
@@ -46,7 +45,7 @@ public class OrcamentoPedidoCustoObraController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         orcamentoPedidoCustoObraService.delete(id);
         return ResponseEntity.noContent().build();

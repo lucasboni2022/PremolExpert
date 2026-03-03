@@ -24,12 +24,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(cors -> {})
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         // Liberar rotas públicas (sem autenticação)
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/forgot-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
+                        .requestMatchers("/hash/**").permitAll()  // Endpoints de hash para primeiro usuário
+                        .requestMatchers("/reset-password.html").permitAll()  // Página de reset de senha
+                        .requestMatchers("/static/**").permitAll()  // Arquivos estáticos
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Proteger todas as outras requisições (require authentication)
                         .anyRequest().authenticated()

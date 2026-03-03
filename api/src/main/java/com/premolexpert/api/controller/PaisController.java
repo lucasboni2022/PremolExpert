@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pais")
-@CrossOrigin(origins = "*")
 public class PaisController {
 
     @Autowired
     private PaisService paisService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Países", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "País", acaoNom = "Consultar")
     public ResponseEntity<Page<PaisDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class PaisController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Países", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "País", acaoNom = "Consultar")
     public ResponseEntity<PaisDTO> buscar(@PathVariable Integer id) {
         PaisDTO dto = paisService.getById(id);
         if (dto == null) {
@@ -37,7 +36,7 @@ public class PaisController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Países", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "País", acaoNom = "Inserir")
     public ResponseEntity<PaisDTO> criar(@RequestBody PaisDTO dto) {
         System.out.println("PaisDTO recebido:");
         System.out.println("ID: " + dto.getPaisId());
@@ -48,7 +47,7 @@ public class PaisController {
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Países", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "País", acaoNom = "Alterar")
     public ResponseEntity<PaisDTO> atualizar(@PathVariable Integer id, @RequestBody PaisDTO dto) {
         dto.setPaisId(id);
         PaisDTO saved = paisService.update(dto);
@@ -59,7 +58,7 @@ public class PaisController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Países", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "País", acaoNom = "Excluir")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         paisService.delete(id);
         return ResponseEntity.noContent().build();

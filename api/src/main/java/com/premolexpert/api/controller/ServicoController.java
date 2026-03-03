@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/servico")
-@CrossOrigin(origins = "*")
 public class ServicoController {
 
     @Autowired
     private ServicoService servicoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Consultar")
     public ResponseEntity<Page<ServicoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class ServicoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Consultar")
     public ResponseEntity<ServicoDTO> getById(@PathVariable Integer id) {
         ServicoDTO dto = servicoService.getById(id);
         if (dto == null) {
@@ -37,14 +36,14 @@ public class ServicoController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Inserir")
     public ResponseEntity<ServicoDTO> create(@RequestBody ServicoDTO dto) {
         ServicoDTO saved = servicoService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Alterar")
     public ResponseEntity<ServicoDTO> update(@PathVariable Integer id, @RequestBody ServicoDTO dto) {
         dto.setSerId(id);
         ServicoDTO saved = servicoService.update(dto);
@@ -55,7 +54,7 @@ public class ServicoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         servicoService.delete(id);
         return ResponseEntity.noContent().build();

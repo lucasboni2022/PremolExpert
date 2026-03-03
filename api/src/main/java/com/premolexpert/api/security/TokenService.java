@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -25,6 +26,17 @@ public class TokenService {
                 .setIssuer("PreMolExpert API")
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(LocalDateTime.now().plusHours(24).atZone(ZoneId.systemDefault()).toInstant()))
+                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    // Gera um token para um subject qualquer com tempo de expiração customizável (útil para forgot-password)
+    public String generateTokenForSubject(String subject, Duration ttl) {
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuer("PreMolExpert API")
+                .setIssuedAt(new Date())
+                .setExpiration(Date.from(LocalDateTime.now().plusSeconds(ttl.getSeconds()).atZone(ZoneId.systemDefault()).toInstant()))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

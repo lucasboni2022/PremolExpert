@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tela")
-@CrossOrigin(origins = "*")
 public class TelaController {
 
     @Autowired
     private TelaService telaService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Telas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Tela", acaoNom = "Consultar")
     public ResponseEntity<Page<TelaDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,20 +24,20 @@ public class TelaController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Telas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Tela", acaoNom = "Consultar")
     public ResponseEntity<TelaDTO> getById(@PathVariable Integer id) {
         TelaDTO dto = telaService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Telas", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Tela", acaoNom = "Inserir")
     public ResponseEntity<TelaDTO> create(@RequestBody TelaDTO dto) {
         return ResponseEntity.ok(telaService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Telas", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Tela", acaoNom = "Alterar")
     public ResponseEntity<TelaDTO> update(@PathVariable Integer id, @RequestBody TelaDTO dto) {
         dto.setTelId(id);
         TelaDTO updated = telaService.update(dto);
@@ -46,7 +45,7 @@ public class TelaController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Telas", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Tela", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         telaService.delete(id);
         return ResponseEntity.noContent().build();

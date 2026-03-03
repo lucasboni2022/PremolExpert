@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orcamentopedido")
-@CrossOrigin(origins = "*")
 public class OrcamentoPedidoController {
 
     @Autowired
     private OrcamentoPedidoService orcamentoPedidoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Consultar")
     public ResponseEntity<Page<OrcamentoPedidoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -26,20 +25,20 @@ public class OrcamentoPedidoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Consultar")
     public ResponseEntity<OrcamentoPedidoDTO> getById(@PathVariable Integer id) {
         OrcamentoPedidoDTO dto = orcamentoPedidoService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Inserir")
     public ResponseEntity<OrcamentoPedidoDTO> create(@RequestBody OrcamentoPedidoDTO dto) {
         return ResponseEntity.ok(orcamentoPedidoService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Alterar")
     public ResponseEntity<OrcamentoPedidoDTO> update(@PathVariable Integer id, @RequestBody OrcamentoPedidoDTO dto) {
         dto.setOrcPedId(id);
         OrcamentoPedidoDTO updated = orcamentoPedidoService.update(dto);
@@ -47,7 +46,7 @@ public class OrcamentoPedidoController {
     }
 
     @PatchMapping("/{id}/etapa")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Alterar")
     public ResponseEntity<Void> updateEtapa(@PathVariable Integer id, @RequestBody OrcamentoPedidoEtapaDTO dto) {
         dto.setOrcPedId(id);
         orcamentoPedidoService.updateEtapa(dto);
@@ -55,7 +54,7 @@ public class OrcamentoPedidoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Orçamentos", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Orçamento", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         orcamentoPedidoService.delete(id);
         return ResponseEntity.noContent().build();

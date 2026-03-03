@@ -23,7 +23,7 @@ public class OrcamentoPedidoCustoObraEng {
     @Column(name = "orcpedcustoobrengqtdlibparfabr")
     private Integer orcPedCustoObrEngQtdLibParFabr;
 
-    @Column(name = "orcpedcustoobrengencLote")
+    @Column(name = "orcpedcustoobrenglote")
     private Integer orcPedCustoObrEngLote;
 
     @ManyToOne(fetch = FetchType.LAZY)

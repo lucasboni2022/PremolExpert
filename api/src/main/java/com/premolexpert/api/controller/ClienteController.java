@@ -13,14 +13,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/cliente")
-@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Clientes", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Cliente", acaoNom = "Consultar")
     public ResponseEntity<Page<ClienteDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -28,7 +27,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Clientes", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Cliente", acaoNom = "Consultar")
     public ResponseEntity<ClienteDTO> getById(@PathVariable Integer id) {
         ClienteDTO dto = clienteService.getById(id);
         if (dto != null) {
@@ -38,7 +37,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Clientes", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Cliente", acaoNom = "Inserir")
     public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO dto) {
         ClienteDTO saved = clienteService.create(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -49,7 +48,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Clientes", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Cliente", acaoNom = "Alterar")
     public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @RequestBody ClienteDTO dto) {
         dto.setPesId(id);
         ClienteDTO updated = clienteService.update(dto);
@@ -60,7 +59,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Clientes", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Cliente", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         clienteService.delete(id);
         return ResponseEntity.noContent().build();

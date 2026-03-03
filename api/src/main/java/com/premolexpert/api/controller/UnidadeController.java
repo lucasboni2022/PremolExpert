@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/unidade")
-@CrossOrigin(origins = "*")
 public class UnidadeController {
 
     @Autowired
     private UnidadeService unidadeService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Unidades", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Unidade", acaoNom = "Consultar")
     public ResponseEntity<Page<UnidadeDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,20 +24,20 @@ public class UnidadeController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Unidades", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Unidade", acaoNom = "Consultar")
     public ResponseEntity<UnidadeDTO> getById(@PathVariable Integer id) {
         UnidadeDTO dto = unidadeService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Unidades", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Unidade", acaoNom = "Inserir")
     public ResponseEntity<UnidadeDTO> create(@RequestBody UnidadeDTO dto) {
         return ResponseEntity.ok(unidadeService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Unidades", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Unidade", acaoNom = "Alterar")
     public ResponseEntity<UnidadeDTO> update(@PathVariable Integer id, @RequestBody UnidadeDTO dto) {
         dto.setUniId(id);
         UnidadeDTO updated = unidadeService.update(dto);
@@ -46,7 +45,7 @@ public class UnidadeController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Unidades", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Unidade", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         unidadeService.delete(id);
         return ResponseEntity.noContent().build();

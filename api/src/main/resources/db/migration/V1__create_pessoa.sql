@@ -1,5 +1,5 @@
-#Costumo usar o Hibernate para gerar um DDL inicial, revisar o script e executar manualmente ou versionar via Flyway(no momento desabilitado).
-CREATE TABLE tbpessoa (
+-- Costumo usar o Hibernate para gerar um DDL inicial, revisar o script e executar manualmente ou versionar via Flyway(no momento desabilitado).
+CREATE TABLE IF NOT EXISTS tbpessoa (
     pesid SERIAL PRIMARY KEY,
     pesnom VARCHAR(150) NOT NULL,
     pescpf VARCHAR(14),

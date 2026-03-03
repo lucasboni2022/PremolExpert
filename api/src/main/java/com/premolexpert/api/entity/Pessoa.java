@@ -33,7 +33,7 @@ public class Pessoa {
     private Municipio municipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "empid", nullable = false)
+    @JoinColumn(name = "empid", nullable = true)
     private Empresa empresa;
 
     @Column(name = "pesfisjur", length = 10)

@@ -13,14 +13,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/usuario")
-@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Usuários", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Usuário", acaoNom = "Consultar")
     public ResponseEntity<Page<UsuarioDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -28,7 +27,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Usuários", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Usuário", acaoNom = "Consultar")
     public ResponseEntity<UsuarioDTO> getById(@PathVariable Integer id) {
         UsuarioDTO dto = usuarioService.getById(id);
         if (dto != null) {
@@ -38,7 +37,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Usuários", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Usuário", acaoNom = "Inserir")
     public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioDTO dto) {
         UsuarioDTO saved = usuarioService.create(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -49,7 +48,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Usuários", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Usuário", acaoNom = "Alterar")
     public ResponseEntity<UsuarioDTO> update(@PathVariable Integer id, @RequestBody UsuarioDTO dto) {
         dto.setPesId(id);
         UsuarioDTO updated = usuarioService.update(dto);
@@ -60,7 +59,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Usuários", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Usuário", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();

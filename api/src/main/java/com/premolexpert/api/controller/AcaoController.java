@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/acao")
-@CrossOrigin(origins = "*")
 public class AcaoController {
 
     @Autowired
     private AcaoService acaoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Ações", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Ação", acaoNom = "Consultar")
     public ResponseEntity<Page<AcaoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,20 +24,20 @@ public class AcaoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Ações", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Ação", acaoNom = "Consultar")
     public ResponseEntity<AcaoDTO> getById(@PathVariable Integer id) {
         AcaoDTO dto = acaoService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
-
+//
     @PostMapping
-    @RequiresPermission(telaNom = "Ações", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Ação", acaoNom = "Inserir")
     public ResponseEntity<AcaoDTO> create(@RequestBody AcaoDTO dto) {
         return ResponseEntity.ok(acaoService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Ações", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Ação", acaoNom = "Alterar")
     public ResponseEntity<AcaoDTO> update(@PathVariable Integer id, @RequestBody AcaoDTO dto) {
         dto.setAcaId(id);
         AcaoDTO updated = acaoService.update(dto);
@@ -46,7 +45,7 @@ public class AcaoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Ações", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Ação", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         acaoService.delete(id);
         return ResponseEntity.noContent().build();

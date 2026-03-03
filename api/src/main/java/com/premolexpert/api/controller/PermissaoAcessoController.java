@@ -11,14 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/permissaoacesso")
-@CrossOrigin(origins = "*")
 public class PermissaoAcessoController {
 
     @Autowired
     private PermissaoAcessoService permissaoAcessoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Permissões", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Permissão", acaoNom = "Consultar")
     public ResponseEntity<Page<PermissaoAcessoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -26,7 +25,7 @@ public class PermissaoAcessoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Permissões", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Permissão", acaoNom = "Consultar")
     public ResponseEntity<PermissaoAcessoDTO> getById(@PathVariable Integer id) {
         PermissaoAcessoDTO dto = permissaoAcessoService.getById(id);
         return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
@@ -38,13 +37,13 @@ public class PermissaoAcessoController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Permissões", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Permissão", acaoNom = "Inserir")
     public ResponseEntity<PermissaoAcessoDTO> create(@RequestBody PermissaoAcessoDTO dto) {
         return ResponseEntity.ok(permissaoAcessoService.create(dto));
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Permissões", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Permissão", acaoNom = "Alterar")
     public ResponseEntity<PermissaoAcessoDTO> update(@PathVariable Integer id, @RequestBody PermissaoAcessoDTO dto) {
         dto.setPermAceId(id);
         PermissaoAcessoDTO updated = permissaoAcessoService.update(dto);
@@ -52,7 +51,7 @@ public class PermissaoAcessoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Permissões", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Permissão", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         permissaoAcessoService.delete(id);
         return ResponseEntity.noContent().build();

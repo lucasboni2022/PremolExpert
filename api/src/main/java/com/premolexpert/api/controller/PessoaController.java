@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pessoa")
-@CrossOrigin(origins = "*")
 public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Pessoas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Pessoa", acaoNom = "Consultar")
     public ResponseEntity<Page<PessoaDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -25,7 +24,7 @@ public class PessoaController {
     }
 
     @GetMapping("/search")
-    @RequiresPermission(telaNom = "Pessoas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Pessoa", acaoNom = "Consultar")
     public ResponseEntity<Page<PessoaDTO>> search(
             @RequestParam String nome,
             @RequestParam(defaultValue = "0") int page,

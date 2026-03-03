@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/servicocusto")
-@CrossOrigin(origins = "*")
 public class ServicoCustoController {
 
     @Autowired
     private ServicoCustoService servicoCustoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Consultar")
     public ResponseEntity<Page<ServicoCustoDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class ServicoCustoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Consultar")
     public ResponseEntity<ServicoCustoDTO> getById(@PathVariable Integer id) {
         ServicoCustoDTO dto = servicoCustoService.getById(id);
         if (dto == null) {
@@ -37,14 +36,14 @@ public class ServicoCustoController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Inserir")
     public ResponseEntity<ServicoCustoDTO> create(@RequestBody ServicoCustoDTO dto) {
         ServicoCustoDTO saved = servicoCustoService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Alterar")
     public ResponseEntity<ServicoCustoDTO> update(@PathVariable Integer id, @RequestBody ServicoCustoDTO dto) {
         dto.setSerCustoId(id);
         ServicoCustoDTO saved = servicoCustoService.update(dto);
@@ -55,7 +54,7 @@ public class ServicoCustoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Serviços", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Serviço", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         servicoCustoService.delete(id);
         return ResponseEntity.noContent().build();

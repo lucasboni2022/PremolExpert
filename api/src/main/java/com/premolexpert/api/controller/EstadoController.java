@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/estado")
-@CrossOrigin(origins = "*")
 public class EstadoController {
 
     @Autowired
     private EstadoService estadoService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Estados", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Estado", acaoNom = "Consultar")
     public ResponseEntity<Page<EstadoDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class EstadoController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Estados", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Estado", acaoNom = "Consultar")
     public ResponseEntity<EstadoDTO> buscar(@PathVariable Integer id) {
         EstadoDTO dto = estadoService.getById(id);
         if (dto == null) {
@@ -37,14 +36,14 @@ public class EstadoController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Estados", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Estado", acaoNom = "Inserir")
     public ResponseEntity<EstadoDTO> criar(@RequestBody EstadoDTO dto) {
         EstadoDTO saved = estadoService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Estados", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Estado", acaoNom = "Alterar")
     public ResponseEntity<EstadoDTO> atualizar(@PathVariable Integer id, @RequestBody EstadoDTO dto) {
         dto.setEstId(id);
         EstadoDTO saved = estadoService.update(dto);
@@ -55,7 +54,7 @@ public class EstadoController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Estados", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Estado", acaoNom = "Excluir")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         estadoService.delete(id);
         return ResponseEntity.noContent().build();

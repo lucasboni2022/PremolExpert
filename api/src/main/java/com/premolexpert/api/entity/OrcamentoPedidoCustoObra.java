@@ -38,7 +38,7 @@ public class OrcamentoPedidoCustoObra {
     @Column(name = "orcpedcustoobrqtd")
     private Integer quantidade;
 
-    @Column(name = "orcpedcustoobrVlrUnit", precision = 18, scale = 2)
+    @Column(name = "orcpedcustoobrvlrunit", precision = 18, scale = 2)
     private BigDecimal valorUnitario;
 
     @Column(name = "orcpedcustoobrpron")

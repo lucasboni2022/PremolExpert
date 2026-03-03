@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/municipio")
-@CrossOrigin(origins = "*")
 public class MunicipioController {
 
     @Autowired
     private MunicipioService municipioService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Municípios", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Município", acaoNom = "Consultar")
     public ResponseEntity<Page<MunicipioDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class MunicipioController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Municípios", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Município", acaoNom = "Consultar")
     public ResponseEntity<MunicipioDTO> buscar(@PathVariable Integer id) {
         MunicipioDTO dto = municipioService.getById(id);
         if (dto == null) {
@@ -37,14 +36,14 @@ public class MunicipioController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Municípios", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Município", acaoNom = "Inserir")
     public ResponseEntity<MunicipioDTO> criar(@RequestBody MunicipioDTO dto) {
         MunicipioDTO saved = municipioService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Municípios", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Município", acaoNom = "Alterar")
     public ResponseEntity<MunicipioDTO> atualizar(@PathVariable Integer id, @RequestBody MunicipioDTO dto) {
         dto.setMunId(id);
         MunicipioDTO saved = municipioService.update(dto);
@@ -55,7 +54,7 @@ public class MunicipioController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Municípios", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Município", acaoNom = "Excluir")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         municipioService.delete(id);
         return ResponseEntity.noContent().build();

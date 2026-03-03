@@ -11,6 +11,7 @@ import com.premolexpert.api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -139,7 +140,10 @@ public class UsuarioService {
         
         if (dto.getEmpId() != null) {
             empresaRepository.findById(dto.getEmpId())
-                .ifPresent(pessoa::setEmpresa);
+                .ifPresent(empresa -> {
+                    pessoa.setEmpresa(empresa);
+                    usuario.setEmpresa(empresa);  // IMPORTANTE: Usuario também precisa da empresa (obrigatório)
+                });
         }
 
         pessoa.setPesFisJur(dto.getPesFisJur());
@@ -188,9 +192,21 @@ public class UsuarioService {
 
     public UsuarioDTO create(UsuarioDTO dto) {
         dto.setUsuId(null);
+
+        // Tentar obter empresa do usuário logado (se estiver autenticado)
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof Usuario) {
+            Usuario usuarioLogado = (Usuario) authentication.getPrincipal();
+            // Se usuário está logado e não foi especificada empId, usa a do usuário logado
+            if (dto.getEmpId() == null && usuarioLogado.getEmpresa() != null) {
+                dto.setEmpId(usuarioLogado.getEmpresa().getEmpId());
+            }
+        }
+
         Usuario usuario = toEntity(dto);
         Pessoa pessoa = usuario.getPessoa();
         
+
         LocalDateTime now = LocalDateTime.now();
         if (pessoa.getPesIncEm() == null) pessoa.setPesIncEm(now);
         if (usuario.getUsuIncEm() == null) usuario.setUsuIncEm(now);
@@ -250,7 +266,8 @@ public class UsuarioService {
                 existing.setPerfil(incoming.getPerfil());
                 
                 if (isPasswordUpdate) {
-                    existing.setUsuSenha(incoming.getUsuSenha());
+                    // Criptografar a senha com BCrypt
+                    existing.setUsuSenha(passwordEncoder.encode(dto.getUsuSenha()));
                 }
                 
                 Usuario saved = usuarioRepository.save(existing);

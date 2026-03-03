@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/empresa")
-@CrossOrigin(origins = "*")
 public class EmpresaController {
 
     @Autowired
     private EmpresaService empresaService;
 
     @GetMapping
-    @RequiresPermission(telaNom = "Empresas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Empresa", acaoNom = "Consultar")
     public ResponseEntity<Page<EmpresaDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -27,7 +26,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}")
-    @RequiresPermission(telaNom = "Empresas", acaoNom = "Consultar")
+    @RequiresPermission(telaNom = "Empresa", acaoNom = "Consultar")
     public ResponseEntity<EmpresaDTO> buscar(@PathVariable Integer id) {
         EmpresaDTO dto = empresaService.getById(id);
         if (dto == null) {
@@ -37,14 +36,14 @@ public class EmpresaController {
     }
 
     @PostMapping
-    @RequiresPermission(telaNom = "Empresas", acaoNom = "Criar")
+    @RequiresPermission(telaNom = "Empresa", acaoNom = "Inserir")
     public ResponseEntity<EmpresaDTO> criar(@RequestBody EmpresaDTO dto) {
         EmpresaDTO saved = empresaService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission(telaNom = "Empresas", acaoNom = "Editar")
+    @RequiresPermission(telaNom = "Empresa", acaoNom = "Alterar")
     public ResponseEntity<EmpresaDTO> atualizar(@PathVariable Integer id, @RequestBody EmpresaDTO dto) {
         dto.setEmpId(id);
         EmpresaDTO saved = empresaService.update(dto);
@@ -55,7 +54,7 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Empresas", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Empresa", acaoNom = "Excluir")
     public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         empresaService.delete(id);
         return ResponseEntity.noContent().build();

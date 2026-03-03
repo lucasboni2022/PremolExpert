@@ -48,8 +48,8 @@ public class Usuario implements UserDetails {
     @Column(name = "usualtem")
     private LocalDateTime usuAltEm;
 
-    @ManyToOne
-    @JoinColumn(name = "perid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "perid" ,nullable = false)
     private Perfil perfil;
 
     public Integer getUsuId() {

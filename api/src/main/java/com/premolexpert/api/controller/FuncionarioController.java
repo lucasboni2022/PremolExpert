@@ -13,7 +13,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/funcionario")
-@CrossOrigin(origins = "*")
 public class FuncionarioController {
 
     @Autowired
@@ -56,7 +55,7 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission(telaNom = "Funcionários", acaoNom = "Deletar")
+    @RequiresPermission(telaNom = "Funcionário", acaoNom = "Excluir")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         funcionarioService.delete(id);
         return ResponseEntity.noContent().build();
